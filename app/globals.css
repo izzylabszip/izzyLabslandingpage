@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------ */
-/* Studio tokens (Layer 1 — izzylabs shell)                            */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* LAYER 1 — izzylabs studio shell (dark, teal, bio-scan)             */
+/* ================================================================== */
 :root {
   --bg-primary: #0a0b0d;
   --bg-elevated: #121417;
@@ -18,43 +18,103 @@
   --status-live: #3fe0c5;
   --status-beta: #e0b93f;
 
+  /* Room surface tokens default to the dark shell so utilities are always valid. */
+  --room-bg: #0a0b0d;
+  --room-surface: #121417;
+  --room-band: #121417;
+  --room-ink: #f2f3f5;
+  --room-muted: #8b9198;
+  --room-line: #23262b;
   --gold: #d4a24c;
-  --cream: #f3e9d8;
-  --radius: 8px;
 
+  --radius: 8px;
   color-scheme: dark;
 }
 
-/* ------------------------------------------------------------------ */
-/* Product rooms (Layer 2) — only the accent family changes            */
-/* ------------------------------------------------------------------ */
-[data-product="glow"] {
-  --accent: #b76e79;
-  --accent-bright: #e2a9b2;
-  --accent-dim: #7a4650;
-  --accent-soft: rgba(183, 110, 121, 0.14);
-  --status-live: #e2a9b2;
+/* ================================================================== */
+/* LAYER 2 — product rooms. Each carries its real brand surface,      */
+/* not a recolor of the dark shell. Values read off the live sites.   */
+/* ================================================================== */
+
+/* glow-landing-five.vercel.app — warm cream, rose, gold */
+[data-room="glow"] {
+  --room-bg: #fbf7f0;
+  --room-surface: #ffffff;
+  --room-band: #f5f0e8;
+  --room-ink: #1d1d1f;
+  --room-muted: #6b6b6b;
+  --room-line: rgba(29, 29, 31, 0.1);
+
+  --accent: #c4617a;
+  --accent-bright: #d97a91;
+  --accent-dim: #e9a0b1;
+  --accent-soft: rgba(217, 122, 145, 0.12);
+  --gold: #d4af37;
+  color-scheme: light;
 }
 
-[data-product="carenearby"] {
+/* ca.carenearby.app — warm off-white, trust green */
+[data-room="carenearby"] {
+  --room-bg: #f4f1ea;
+  --room-surface: #ffffff;
+  --room-band: #ede9de;
+  --room-ink: #0a0a0a;
+  --room-muted: #5a5a5a;
+  --room-line: rgba(10, 10, 10, 0.1);
+
   --accent: #057a55;
-  --accent-bright: #22b37e;
-  --accent-dim: #0b4d38;
-  --accent-soft: rgba(5, 122, 85, 0.16);
-  --status-live: #22b37e;
+  --accent-bright: #0ea56f;
+  --accent-dim: #034e36;
+  --accent-soft: rgba(14, 165, 111, 0.14);
+  --gold: #ffd66b;
+  color-scheme: light;
 }
 
-[data-product="lami-nepal"] {
-  --accent: #c0272d;
-  --accent-bright: #e8636a;
-  --accent-dim: #6e1a1e;
-  --accent-soft: rgba(192, 39, 45, 0.14);
-  --status-live: #e8636a;
+/* laminepal.com.np — white, red, orange, gold */
+[data-room="lami-nepal"] {
+  --room-bg: #ffffff;
+  --room-surface: #ffffff;
+  --room-band: #f3f4f6;
+  --room-ink: #1f2937;
+  --room-muted: #4b5563;
+  --room-line: #e5e7eb;
+
+  --accent: #dc2626;
+  --accent-bright: #f97316;
+  --accent-dim: #b91c1c;
+  --accent-soft: rgba(220, 38, 38, 0.1);
+  --gold: #d4a24c;
+  color-scheme: light;
 }
 
-/* ------------------------------------------------------------------ */
-/* Tailwind theme bridge — utilities resolve to the live variables     */
-/* ------------------------------------------------------------------ */
+/* A dark band inside a light room (Glow "For Artists", CareNearby trust). */
+.room-dark {
+  --room-bg: #131315;
+  --room-surface: rgba(255, 255, 255, 0.04);
+  --room-band: #131315;
+  --room-ink: #f7f7f8;
+  --room-muted: #a0a0a6;
+  --room-line: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
+}
+
+/* CareNearby's deep-green band. */
+.room-green {
+  --room-bg: #034e36;
+  --room-surface: rgba(255, 255, 255, 0.06);
+  --room-band: #034e36;
+  --room-ink: #ffffff;
+  --room-muted: rgba(255, 255, 255, 0.72);
+  --room-line: rgba(255, 255, 255, 0.16);
+  --accent: #ffd66b;
+  --accent-bright: #ffd66b;
+  --accent-soft: rgba(255, 214, 107, 0.16);
+  color-scheme: dark;
+}
+
+/* ================================================================== */
+/* Tailwind bridge                                                     */
+/* ================================================================== */
 @theme inline {
   --color-bg: var(--bg-primary);
   --color-elevated: var(--bg-elevated);
@@ -70,10 +130,19 @@
   --color-live: var(--status-live);
   --color-beta: var(--status-beta);
   --color-gold: var(--gold);
-  --color-cream: var(--cream);
+
+  /* Room surfaces */
+  --color-room: var(--room-bg);
+  --color-surface: var(--room-surface);
+  --color-band: var(--room-band);
+  --color-ink: var(--room-ink);
+  --color-ink-muted: var(--room-muted);
+  --color-line: var(--room-line);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --font-product: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
 
   --radius-panel: var(--radius);
 
@@ -86,91 +155,45 @@
   --animate-ticker: ticker 1.6s ease-in-out infinite;
 }
 
-@keyframes blink {
-  to {
-    visibility: hidden;
-  }
-}
+@keyframes blink { to { visibility: hidden; } }
 
 @keyframes pulse-dot {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 var(--accent-soft);
-  }
-  50% {
-    box-shadow: 0 0 0 6px transparent;
-  }
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-soft); }
+  50% { box-shadow: 0 0 0 6px transparent; }
 }
 
 @keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  33% {
-    transform: translate3d(14px, -22px, 0);
-  }
-  66% {
-    transform: translate3d(-10px, 12px, 0);
-  }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(14px, -22px, 0); }
+  66% { transform: translate3d(-10px, 12px, 0); }
 }
 
 @keyframes scan-x {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100%);
-  }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
 
 @keyframes wordmark {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  60% {
-    transform: translateX(100%);
-    opacity: 1;
-  }
-  61%,
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+  0% { transform: translateX(-100%); opacity: 0; }
+  15% { opacity: 1; }
+  60% { transform: translateX(100%); opacity: 1; }
+  61%, 100% { transform: translateX(100%); opacity: 0; }
 }
 
 @keyframes reticle {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.04);
-    opacity: 0.6;
-  }
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.04); opacity: 0.6; }
 }
 
 @keyframes ticker {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
 }
 
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
 /* Base                                                                */
-/* ------------------------------------------------------------------ */
-html {
-  scroll-behavior: smooth;
-}
+/* ================================================================== */
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg-primary);
@@ -191,9 +214,9 @@ body {
   outline-offset: 3px;
 }
 
-/* ------------------------------------------------------------------ */
-/* Shared primitives                                                   */
-/* ------------------------------------------------------------------ */
+/* ================================================================== */
+/* Primitives                                                          */
+/* ================================================================== */
 @utility label {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -202,14 +225,17 @@ body {
   text-transform: uppercase;
 }
 
-@utility hairline {
-  border: 1px solid var(--border-hairline);
-}
-
 @utility panel {
   background: var(--bg-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius);
+}
+
+/* Card that belongs to a product room rather than the studio shell. */
+@utility card {
+  background: var(--room-surface);
+  border: 1px solid var(--room-line);
+  border-radius: 14px;
 }
 
 @utility bg-grid {
@@ -228,38 +254,39 @@ body {
 
 @utility corner-ticks {
   background-image:
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent));
+    linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent));
   background-repeat: no-repeat;
-  background-size:
-    10px 1px,
-    1px 10px,
-    10px 1px,
-    1px 10px,
-    10px 1px,
-    1px 10px,
-    10px 1px,
-    1px 10px;
+  background-size: 10px 1px, 1px 10px, 10px 1px, 1px 10px, 10px 1px, 1px 10px, 10px 1px, 1px 10px;
   background-position:
-    top left,
-    top left,
-    top right,
-    top right,
-    bottom left,
-    bottom left,
-    bottom right,
-    bottom right;
+    top left, top left, top right, top right,
+    bottom left, bottom left, bottom right, bottom right;
+}
+
+/* Glow's own dotted texture, lifted from its landing page. */
+@utility bg-dots-rose {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D97A91' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.045;
+}
+
+/* Nepali copy in the Lami Nepal room. */
+.np {
+  font-family: var(--font-devanagari), var(--font-jakarta), sans-serif;
+  line-height: 1.75;
+}
+
+/* Italic serif accent, as used by both Glow and CareNearby. */
+.serif {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .field {
@@ -273,19 +300,10 @@ body {
   font-size: 1rem;
   transition: border-color 200ms ease;
 }
-.field::placeholder {
-  color: color-mix(in srgb, var(--text-secondary) 55%, transparent);
-}
-.field:focus {
-  outline: none;
-  border-bottom-color: var(--accent);
-}
+.field::placeholder { color: color-mix(in srgb, var(--text-secondary) 55%, transparent); }
+.field:focus { outline: none; border-bottom-color: var(--accent); }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .motion-ambient {
-    animation: none !important;
-  }
+  html { scroll-behavior: auto; }
+  .motion-ambient { animation: none !important; }
 }

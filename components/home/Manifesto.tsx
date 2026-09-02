@@ -4,14 +4,15 @@ import { Section } from "@/components/Section";
 import { ScanReveal } from "@/components/ScanReveal";
 import { StatRow } from "@/components/StatChip";
 import { site } from "@/lib/site";
-import type { Project } from "@/lib/projects-data";
+import { projectBySlug, type Project } from "@/lib/projects-data";
 
 function P({ slug, children }: { slug: Project["slug"]; children: ReactNode }) {
+  const accent = projectBySlug(slug)?.theme.accent ?? "var(--accent)";
   return (
     <Link
       href={`/work/${slug}`}
-      data-product={slug}
-      className="text-accent-bright underline decoration-accent-dim decoration-1 underline-offset-8 transition-colors hover:decoration-accent-bright"
+      className="underline decoration-1 underline-offset-8 transition-opacity hover:opacity-80"
+      style={{ color: accent, textDecorationColor: `${accent}66` }}
     >
       {children}
     </Link>

@@ -2,15 +2,20 @@
 
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/cn";
 
 type Line = { key: string; value: string };
 
-/** Simulated face-scan telemetry. Lines type in one by one once in view. */
-export function ScanReadout({ lines }: { lines: Line[] }) {
+/**
+ * Simulated face-scan telemetry. Lines resolve one by one once in view.
+ * `tone="room"` renders on a product room's light surface.
+ */
+export function ScanReadout({ lines, tone = "studio" }: { lines: Line[]; tone?: "studio" | "room" }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const reduced = useReducedMotion();
   const [done, setDone] = useState(false);
+  const room = tone === "room";
 
   const total = reduced ? 0 : 0.4 + lines.length * 0.22;
 
@@ -21,24 +26,27 @@ export function ScanReadout({ lines }: { lines: Line[] }) {
   }, [inView, total]);
 
   return (
-    <div ref={ref} className="panel corner-ticks relative p-6 md:p-7">
-      <div className="label flex items-center justify-between text-muted">
-        <span>Face scan // readout</span>
+    <div
+      ref={ref}
+      className={cn(
+        "corner-ticks relative p-6 md:p-7",
+        room ? "card" : "panel",
+      )}
+    >
+      <div className={cn("label flex items-center justify-between", room ? "text-ink-muted" : "text-muted")}>
+        <span>Face scan {"//"} readout</span>
         <span className="flex items-center gap-2">
           <span
-            className={
-              done
-                ? "h-1.5 w-1.5 rounded-full bg-live"
-                : "h-1.5 w-1.5 animate-ticker rounded-full bg-accent"
-            }
+            className={cn(
+              "h-1.5 w-1.5 rounded-full",
+              done ? "bg-accent" : "animate-ticker bg-accent",
+            )}
           />
-          <span className={done ? "text-live" : "text-accent-bright"}>
-            {done ? "Complete" : inView ? "Analyzing" : "Standby"}
-          </span>
+          <span className="text-accent">{done ? "Complete" : inView ? "Analyzing" : "Standby"}</span>
         </span>
       </div>
 
-      <div className="mt-5 h-px w-full overflow-hidden bg-hairline">
+      <div className={cn("mt-5 h-px w-full overflow-hidden", room ? "bg-line" : "bg-hairline")}>
         <motion.div
           className="h-full bg-accent"
           initial={{ width: 0 }}
@@ -56,13 +64,13 @@ export function ScanReadout({ lines }: { lines: Line[] }) {
             transition={{ delay: reduced ? 0 : 0.35 + i * 0.22, duration: 0.3 }}
             className="flex items-center justify-between gap-6"
           >
-            <span className="text-muted">{l.key}</span>
-            <span className="text-fg">{l.value}</span>
+            <span className={room ? "text-ink-muted" : "text-muted"}>{l.key}</span>
+            <span className={room ? "font-semibold text-ink" : "text-fg"}>{l.value}</span>
           </motion.li>
         ))}
       </ul>
 
-      <p className="label mt-6 text-muted normal-case tracking-normal">
+      <p className={cn("mt-6 text-xs leading-relaxed", room ? "text-ink-muted" : "text-muted")}>
         Illustrative readout. Real scans run on-device first, then a Gemini pass.
       </p>
     </div>

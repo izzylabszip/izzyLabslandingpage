@@ -81,10 +81,12 @@ export function Hero() {
               <Link
                 key={p.slug}
                 href={`/work/${p.slug}`}
-                data-product={p.slug}
-                className="inline-flex items-center gap-2 text-fg/80 transition-colors hover:text-accent-bright"
+                className="inline-flex items-center gap-2 text-fg/80 transition-colors hover:text-fg"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: p.theme.accent }}
+                />
                 {p.name}
               </Link>
             ))}
