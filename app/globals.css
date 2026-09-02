@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Studio tokens (Layer 1 — izzylabs shell)                            */
+/* ------------------------------------------------------------------ */
+:root {
+  --bg-primary: #0a0b0d;
+  --bg-elevated: #121417;
+  --border-hairline: #23262b;
+  --text-primary: #f2f3f5;
+  --text-secondary: #8b9198;
+
+  --accent: #3fe0c5;
+  --accent-bright: #3fe0c5;
+  --accent-dim: #1e7a6c;
+  --accent-soft: rgba(63, 224, 197, 0.12);
+
+  --status-live: #3fe0c5;
+  --status-beta: #e0b93f;
+
+  --gold: #d4a24c;
+  --cream: #f3e9d8;
+  --radius: 8px;
+
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------ */
+/* Product rooms (Layer 2) — only the accent family changes            */
+/* ------------------------------------------------------------------ */
+[data-product="glow"] {
+  --accent: #b76e79;
+  --accent-bright: #e2a9b2;
+  --accent-dim: #7a4650;
+  --accent-soft: rgba(183, 110, 121, 0.14);
+  --status-live: #e2a9b2;
+}
+
+[data-product="carenearby"] {
+  --accent: #057a55;
+  --accent-bright: #22b37e;
+  --accent-dim: #0b4d38;
+  --accent-soft: rgba(5, 122, 85, 0.16);
+  --status-live: #22b37e;
+}
+
+[data-product="lami-nepal"] {
+  --accent: #c0272d;
+  --accent-bright: #e8636a;
+  --accent-dim: #6e1a1e;
+  --accent-soft: rgba(192, 39, 45, 0.14);
+  --status-live: #e8636a;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tailwind theme bridge — utilities resolve to the live variables     */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --color-bg: var(--bg-primary);
+  --color-elevated: var(--bg-elevated);
+  --color-hairline: var(--border-hairline);
+  --color-fg: var(--text-primary);
+  --color-muted: var(--text-secondary);
+
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-live: var(--status-live);
+  --color-beta: var(--status-beta);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-panel: var(--radius);
+
+  --animate-blink: blink 1.1s steps(2, start) infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-scan-x: scan-x 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  --animate-wordmark: wordmark 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-reticle: reticle 2.8s ease-in-out infinite;
+  --animate-ticker: ticker 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    transform: translate3d(14px, -22px, 0);
+  }
+  66% {
+    transform: translate3d(-10px, 12px, 0);
+  }
+}
+
+@keyframes scan-x {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes wordmark {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  61%,
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes reticle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.6;
+  }
+}
+
+@keyframes ticker {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared primitives                                                   */
+/* ------------------------------------------------------------------ */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility hairline {
+  border: 1px solid var(--border-hairline);
+}
+
+@utility panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(242, 243, 245, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(242, 243, 245, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility bg-grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(242, 243, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(242, 243, 245, 0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+@utility corner-ticks {
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-size:
+    10px 1px,
+    1px 10px,
+    10px 1px,
+    1px 10px,
+    10px 1px,
+    1px 10px,
+    10px 1px,
+    1px 10px;
+  background-position:
+    top left,
+    top left,
+    top right,
+    top right,
+    bottom left,
+    bottom left,
+    bottom right,
+    bottom right;
+}
+
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+}
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border-hairline);
+  padding: 0.75rem 0;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  transition: border-color 200ms ease;
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--text-secondary) 55%, transparent);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .motion-ambient {
+    animation: none !important;
+  }
+}
