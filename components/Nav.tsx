@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { Wordmark } from "./Wordmark";
 
+/* Capabilities points at the real page rather than the home-page anchor. The
+   anchor scrolled to three cards; the page is three indexable documents that
+   can rank for "QA testing Kathmandu" and the like, and it is no use to
+   anybody if nothing links to it. */
 const links = [
   { label: "Work", href: "/#work" },
-  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Capabilities", href: "/services" },
   { label: "Contact", href: "/#contact" },
 ];
 

@@ -10,6 +10,7 @@ import "./globals.css";
 import { site } from "@/lib/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { graph, organization, website } from "@/lib/schema";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -69,6 +70,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${jetbrains.variable} ${jakarta.variable} ${instrument.variable} ${devanagari.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
+        {/* The studio's identity, on every page. It lived nowhere before this:
+            a crawler or an assistant reading izzylabs.ca had no machine-readable
+            statement of what this is, where it is, or what it sells. Individual
+            pages add their own Service and BreadcrumbList nodes, which reference
+            this one by @id rather than restating it. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(graph(organization(), website())),
+          }}
+        />
         <Nav />
         <main className="relative z-10 flex-1">{children}</main>
         <Footer />
