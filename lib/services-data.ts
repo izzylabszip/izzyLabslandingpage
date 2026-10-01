@@ -58,8 +58,16 @@ export const services: Service[] = [
           "The suites we build are the ones that run in CI and block a merge. A suite that lives on somebody's laptop and gets run before big releases is documentation, not a gate.",
         ],
       },
+      {
+        heading: "Hiring a QA engineer, or hiring the practice",
+        body: [
+          "People who come here looking to hire a QA engineer in Nepal are usually solving one of two problems. Either there is no test discipline and somebody has to build one from nothing, or releases keep breaking and nobody can say why. They need different work in the first month and it is worth being clear which one you have before anybody quotes you.",
+          "QA testing services for startups almost always means the first. A pre-Series-A team does not need a QA department; it needs the three things that stop a demo breaking — a regression suite on the paths that take money, a release checklist somebody actually follows, and a bug that gets reproduced before it gets argued about. That is a scoped engagement, not a headcount.",
+          "We work as an embedded contractor rather than an outsourced test house: in your repo, in your CI, writing suites your engineers can read and run after we leave. A test suite nobody on your team understands is a liability with a green tick on it.",
+        ],
+      },
     ],
-    tags: ["Cypress", "Postman", "Selenium", "Regression", "CI gates"],
+    tags: ["Cypress", "Postman", "Selenium", "Regression", "CI gates", "Contract QA"],
   },
   {
     slug: "full-stack-development",
@@ -82,7 +90,7 @@ export const services: Service[] = [
         heading: "What end to end means here",
         body: [
           "It means the parts nobody demos: the migration path, the error states, what happens when the payment provider times out halfway, and the admin surface somebody has to use on a Tuesday.",
-          "Three products are live and running on this basis — a salon booking platform, a home-care marketplace in Ontario, and a matchmaking app in Nepal. They are on this site under Work, with what each one actually involved.",
+          "Four products are live and running on this basis — a beauty marketplace in Nepal, a home-care marketplace in Ontario, a matchmaking platform in Kathmandu, and a single-chair barbershop in Sudbury. They are on this site under Work, with what each one actually involved and what it cost to get wrong.",
         ],
       },
       {
@@ -92,8 +100,31 @@ export const services: Service[] = [
           "Where a rewrite is genuinely the right answer we will say so, and where it is not — which is more often — we will say that instead.",
         ],
       },
+      {
+        heading: "Mobile: what a React Native studio is for",
+        body: [
+          "Two of the four live products are Expo apps, which is why this reads as a React Native development studio in Kathmandu rather than a web shop that also does mobile. The difference shows up in the parts that are specific to shipping on a phone: the App Store review round trip, over-the-air updates, permission states, camera and location, and what the app does on a three-year-old Android on a bad connection.",
+          "Hiring an Expo and React Native developer usually starts as a build and turns into a release process, because the first submission is where a team finds out what it did not have — a signing setup only one person can run, no staged rollout, no way to ship a fix without another review cycle. We set that up as part of the build rather than discovering it at submission.",
+        ],
+      },
+      {
+        heading: "MVP work, and what it should not include",
+        body: [
+          "A founder looking to hire a full-stack developer for a startup MVP is buying an answer to a question, not a product. The job is to get the smallest honest version of the thing in front of real users fast enough that the answer still matters.",
+          "So: no multi-tenant architecture before the second tenant, no microservices, no admin panel that could have been a database client, no design system for four screens. What does go in from day one is auth, payments if money is involved, error reporting, and a deploy anybody on the team can run — because those are the four things that are miserable to retrofit and boring to add early.",
+          "The honest caveat: an MVP built this way is meant to be partly thrown away. If the plan is to scale the first version rather than learn from it, that is a different, slower and more expensive engagement, and it is better to say so before it starts.",
+        ],
+      },
     ],
-    tags: ["Next.js", "Expo / React Native", "TypeScript", "Postgres", "Stripe"],
+    tags: [
+      "Next.js",
+      "Expo / React Native",
+      "TypeScript",
+      "Postgres",
+      "Stripe",
+      "MVP builds",
+      "App Store releases",
+    ],
   },
   {
     slug: "ai-integration",
@@ -126,8 +157,24 @@ export const services: Service[] = [
           "And an honest answer about whether the problem wants a model at all. A surprising amount of what gets specified as an AI feature is a database query with better copy, and it is cheaper, faster and more reliable built that way.",
         ],
       },
+      {
+        heading: "What to expect from an AI app development agency",
+        body: [
+          "Most of what is sold as AI app development in Nepal and everywhere else is a wrapper around someone else's API with a chat box on top. That is sometimes the correct build. It is worth knowing that is what you are buying, and worth paying accordingly.",
+          "The work that is actually worth contracting out is the part around the model: deciding what goes on-device and what goes to a provider, an evaluation set that catches a regression before a user does, fallbacks for timeouts and outages, and a cost model that does not surprise you in month three when usage triples.",
+          "Glow is the working example on this site — a face scan where the cheap deterministic checks run on the handset first and only a frame worth paying for reaches Gemini, with a manual path behind it so a failed model call never costs a booking. The case study says how it is put together.",
+        ],
+      },
     ],
-    tags: ["LLM integration", "On-device ML", "Vision", "Evaluation", "Guardrails"],
+    tags: [
+      "LLM integration",
+      "Gemini",
+      "On-device ML",
+      "Vision",
+      "Evaluation",
+      "Guardrails",
+      "Cost modelling",
+    ],
   },
 ];
 

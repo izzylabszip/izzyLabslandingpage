@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { serviceBySlug, serviceSlugs, services } from "@/lib/services-data";
-import { graph, serviceSchema, breadcrumbs } from "@/lib/schema";
+import { graph, serviceSchema, breadcrumbs, ldJson } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -52,7 +52,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
     <main className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: ldJson(jsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="label mb-10 text-muted">

@@ -5,12 +5,13 @@ import {
   Plus_Jakarta_Sans,
   Instrument_Serif,
   Noto_Sans_Devanagari,
+  Bebas_Neue,
 } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { graph, organization, website } from "@/lib/schema";
+import { graph, organization, website, ldJson } from "@/lib/schema";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -35,6 +36,14 @@ const instrument = Instrument_Serif({
   display: "swap",
 });
 
+/** Amit Blends sets its display type in Bebas Neue, so its room does too. */
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas",
+  display: "swap",
+});
+
 /** Lami Nepal's room carries real Nepali copy, which needs Devanagari glyphs. */
 const devanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
@@ -49,6 +58,10 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  /* The home page had no canonical at all. Every other indexable page on the
+     site declares one, and the root is the page most likely to be reached
+     with a stray query string on it. */
+  alternates: { canonical: site.url },
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
@@ -67,7 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrains.variable} ${jakarta.variable} ${instrument.variable} ${devanagari.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrains.variable} ${jakarta.variable} ${instrument.variable} ${bebas.variable} ${devanagari.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
         {/* The studio's identity, on every page. It lived nowhere before this:
@@ -78,7 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(graph(organization(), website())),
+            __html: ldJson(graph(organization(), website())),
           }}
         />
         <Nav />

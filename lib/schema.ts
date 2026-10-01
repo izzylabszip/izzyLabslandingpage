@@ -1,5 +1,6 @@
 import { site } from "@/lib/site";
 import { services } from "@/lib/services-data";
+import { projects, type Project } from "@/lib/projects-data";
 
 /**
  * JSON-LD for the studio.
@@ -22,6 +23,20 @@ const ID = {
   website: `${site.url}/#website`,
 };
 
+/**
+ * Next's own JSON-LD guide asks for this, and it costs nothing.
+ *
+ * Every string below is authored in a TypeScript module in this repo, so there
+ * is no untrusted input and no live XSS here today. The escape exists for the
+ * day a project description or a pull quote starts coming from a CMS or a
+ * client form, because that change will not arrive with a reminder to revisit
+ * the serialisation. Escaping `<` keeps a `</script>` inside any string from
+ * closing the tag it sits in.
+ */
+export function ldJson(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
 export function organization() {
   return {
     "@type": ["Organization", "ProfessionalService"],
@@ -32,6 +47,12 @@ export function organization() {
     url: site.url,
     slogan: site.tagline,
     foundingDate: String(site.founded),
+    founder: {
+      "@type": "Person",
+      name: site.founder.name,
+      jobTitle: site.founder.jobTitle,
+      ...(site.founder.sameAs.length ? { sameAs: site.founder.sameAs } : {}),
+    },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kathmandu",
@@ -80,6 +101,67 @@ export function serviceSchema(slug: string) {
     url,
     provider: { "@id": ID.org },
     areaServed: { "@type": "Place", name: "Worldwide" },
+  };
+}
+
+/**
+ * A shipped product, as a CreativeWork.
+ *
+ * schema.org has no type for "a thing an agency built for a client", and the
+ * near misses are worse than the generic: `Product` implies izzylabs sells
+ * Glow, `Service` describes the engagement rather than the artefact, and
+ * `SoftwareApplication` would be a lie about Lami Nepal's website and Amit
+ * Blends' static site. `CreativeWork` with an explicit `creator` says the true
+ * and narrow thing — this exists, izzylabs made it, it lives at that URL — and
+ * stops there rather than reaching for a richer type it does not fit.
+ *
+ * `sameAs` points at the live product. That is the link that matters: it tells
+ * a crawler the case study and the real thing are the same entity.
+ */
+export function creativeWork(project: Project) {
+  const url = `${site.url}/work/${project.slug}`;
+  const live = project.links.find((l) => l.primary) ?? project.links[0];
+
+  return {
+    "@type": "CreativeWork",
+    "@id": `${url}#work`,
+    name: project.name,
+    alternateName: project.tagline,
+    description: project.description,
+    url,
+    creator: { "@id": ID.org },
+    /* The studio built it; the studio does not own it. Saying otherwise in
+       markup is the kind of claim a client notices. */
+    ...(live ? { sameAs: [live.href] } : {}),
+    about: project.caseStudy.stack.flatMap((g) => g.items),
+    inLanguage: "en",
+    isPartOf: { "@id": ID.website },
+  };
+}
+
+/**
+ * The portfolio as an ItemList on the home page.
+ *
+ * The four specimens are already CreativeWork nodes on their own pages. This
+ * says they are a set and what order they are in, which is the difference
+ * between a crawler finding four unrelated pages and finding a body of work.
+ * It is also the node an assistant answering "what has izzylabs built" can
+ * read without loading four documents.
+ */
+export function workCollection() {
+  return {
+    "@type": "ItemList",
+    "@id": `${site.url}/#work`,
+    name: "Products built by izzylabs",
+    numberOfItems: projects.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: projects.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${site.url}/work/${p.slug}`,
+      name: p.name,
+      description: p.description,
+    })),
   };
 }
 

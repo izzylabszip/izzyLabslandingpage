@@ -10,11 +10,14 @@ export function Projects() {
       id="work"
       eyebrow="Work // 02"
       title="Specimens"
-      lead="Three live products, each built, tested and shipped by izzylabs. Open a panel to walk into its room, or go straight to the live product."
+      lead="Four live products, each built, tested and shipped by izzylabs. Open a panel to walk into its room and read the case study, or go straight to the live product."
     >
       <div className="grid gap-5 lg:grid-cols-2">
         {projects.map((p, i) => {
-          const featured = p.slug === "glow";
+          /* Glow leads and Amit Blends closes, both full width. With four
+             specimens in a two-column grid that is what keeps the rows even —
+             a half-width card alone on the last row reads as a layout bug. */
+          const featured = p.slug === "glow" || p.slug === "amit-blends";
           return (
             <ScanReveal
               key={p.slug}

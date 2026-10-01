@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { services } from "@/lib/services-data";
-import { graph, breadcrumbs } from "@/lib/schema";
+import { graph, breadcrumbs, ldJson } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Capabilities — QA, full-stack and AI",
   description:
-    "What izzylabs does: QA and software testing, full-stack web and mobile development, and AI integration with evaluation and guardrails. A studio in Kathmandu working worldwide.",
+    "Hire a QA engineer, a full-stack developer for a startup MVP, or an Expo and React Native team. A QA-driven engineering studio in Kathmandu, working worldwide.",
   alternates: { canonical: `${site.url}/services` },
 };
 
@@ -23,7 +23,7 @@ export default function ServicesPage() {
     <main className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: ldJson(jsonLd) }}
       />
 
       <nav aria-label="Breadcrumb" className="label mb-10 text-muted">
@@ -39,7 +39,14 @@ export default function ServicesPage() {
       </h1>
       <p className="mt-6 text-lg text-muted md:text-xl">
         Three things, properly, rather than a list of everything. Each one has shipped inside a
-        product that is live.
+        product that is live — four of them, from a two-sided marketplace down to a single-chair
+        barbershop.
+      </p>
+      <p className="mt-5 text-muted leading-relaxed">
+        Most people arrive here trying to hire someone specific: a QA engineer, a full-stack
+        developer for a startup MVP, an Expo and React Native developer, or a team that has shipped
+        an AI feature before rather than demoed one. The pages below say what each of those actually
+        involves, including the parts worth arguing about before a contract starts.
       </p>
 
       <ul className="mt-14 space-y-10">

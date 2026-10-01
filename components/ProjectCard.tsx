@@ -51,7 +51,10 @@ export function ProjectCard({ project, featured = false }: Props) {
           <div className="relative">
             <p
               className="text-2xl font-bold leading-[1.05] tracking-[-0.03em] md:text-3xl"
-              style={{ color: project.slug === "lami-nepal" ? "#1F2937" : "#1D1D1F" }}
+              /* Three rooms are light and want dark ink; Amit Blends' shopfront
+                 is dark and wants cream. The card reads it off the theme rather
+                 than growing another slug check. */
+              style={{ color: project.theme.previewInk ?? "#1D1D1F" }}
             >
               {project.tagline}
             </p>

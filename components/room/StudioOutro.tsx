@@ -21,21 +21,11 @@ export function StudioOutro({
         <ScanReveal>
           <p className="label text-accent">izzylabs build notes</p>
           <h2 className="mt-5 max-w-2xl text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-            How {project.name} was built and tested
+            {project.name} at a glance
           </h2>
         </ScanReveal>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {project.story.map((s, i) => (
-            <ScanReveal key={s.heading} delay={i * 0.12}>
-              <p className="label text-accent-dim">0{i + 1}</p>
-              <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">{s.heading}</h3>
-              <p className="mt-3 leading-relaxed text-muted">{s.body}</p>
-            </ScanReveal>
-          ))}
-        </div>
-
-        <ScanReveal className="mt-16">
+        <ScanReveal className="mt-12">
           <dl className="grid gap-px overflow-hidden rounded-panel border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
             {project.highlights.map((h) => (
               <div key={h.label} className="bg-elevated p-5">

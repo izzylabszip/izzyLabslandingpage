@@ -87,6 +87,24 @@
   color-scheme: light;
 }
 
+/* amitblends.com — ink, flame orange, wood tan. The only room that is dark,
+   because the shop's own site is. Values read off its stylesheet. */
+[data-room="amit-blends"] {
+  --room-bg: #0d0b09;
+  --room-surface: #1c1715;
+  --room-band: #141110;
+  --room-ink: #f7f2ea;
+  --room-muted: rgba(247, 242, 234, 0.68);
+  --room-line: rgba(217, 171, 121, 0.15);
+
+  --accent: #e2662c;
+  --accent-bright: #f5a173;
+  --accent-dim: #b84d1d;
+  --accent-soft: rgba(226, 102, 44, 0.14);
+  --gold: #b3814f;
+  color-scheme: dark;
+}
+
 /* A dark band inside a light room (Glow "For Artists", CareNearby trust). */
 .room-dark {
   --room-bg: #131315;
@@ -143,6 +161,7 @@
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
   --font-product: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
   --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
+  --font-condensed: var(--font-bebas), "Haettenschweiler", "Arial Narrow", sans-serif;
 
   --radius-panel: var(--radius);
 
@@ -279,6 +298,14 @@ body {
 .np {
   font-family: var(--font-devanagari), var(--font-jakarta), sans-serif;
   line-height: 1.75;
+}
+
+/* Amit Blends sets everything in a condensed display face. */
+.condensed {
+  font-family: var(--font-condensed);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 0.92;
 }
 
 /* Italic serif accent, as used by both Glow and CareNearby. */

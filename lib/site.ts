@@ -36,15 +36,30 @@ export const site = {
   name: "izzylabs",
   tagline: "The studio that makes it possible.",
   description:
-    "izzylabs is a QA-driven engineering studio in Kathmandu building full-stack and AI products. The engine behind Glow, CareNearby and Lami Nepal.",
+    "izzylabs is a QA-driven engineering studio in Kathmandu building full-stack and AI products — the engine behind Glow, CareNearby, Lami Nepal and Amit Blends.",
   url: resolveSiteUrl(),
   location: "Kathmandu, NP",
   founded: 2026,
+  /**
+   * Named in the Organization markup. A one-person-led studio with no founder
+   * in its structured data is harder for an assistant to answer "who runs
+   * izzylabs" about than one that says so plainly.
+   *
+   * `sameAs` is empty and should not stay that way — a LinkedIn and a GitHub
+   * URL here is the cheapest entity-disambiguation signal available to a
+   * studio that shares its name with unrelated companies abroad.
+   * [NEEDS: Aashish's public LinkedIn and GitHub profile URLs.]
+   */
+  founder: {
+    name: "Aashish Kant",
+    jobTitle: "Founder and principal engineer",
+    sameAs: [] as string[],
+  },
   /** Optional. Shown in the footer only when set. */
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
   socials: [] as { label: string; href: string }[],
   stats: [
-    { label: "Projects shipped", value: "03" },
+    { label: "Projects shipped", value: "04" },
     { label: "Founded", value: "2026" },
     { label: "Based", value: "Kathmandu, NP" },
     { label: "Focus", value: "QA + Full-stack + AI" },
