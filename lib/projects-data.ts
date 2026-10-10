@@ -554,7 +554,7 @@ export const projects: Project[] = [
     },
     highlights: [
       { label: "Services", value: "7 priced" },
-      { label: "Indexed pages", value: "22" },
+      { label: "Indexed pages", value: "23" },
       { label: "Guides", value: "7 posts" },
       { label: "Booking", value: "WhatsApp handoff" },
     ],
@@ -586,8 +586,8 @@ export const projects: Project[] = [
             body: "A Person and LocalBusiness JSON-LD graph with an Offer per service, priceCurrency CAD and areaServed Greater Sudbury. For a single-location service business this is the highest-leverage on-page work there is, and it was the gap.",
           },
           {
-            title: "Seven direct-answer guides",
-            body: "Beard neckline placement, what a haircut costs in Sudbury, how often to get a cut, how to ask for a fade, taper versus fade, walk-in or book ahead, and tipping a barber in Canada. Each one is a question people type, answered in the first paragraph rather than after four hundred words of preamble.",
+            title: "Eight direct-answer guides",
+            body: "Beard neckline placement, what a haircut costs in Sudbury, how often to get a cut, how to ask for a fade, taper versus fade, walk-in or book ahead, tipping a barber in Canada, and Sudbury winter hair. Each one is a question people type, answered in the first paragraph rather than after four hundred words of preamble.",
           },
           {
             title: "Hours published with their own caveat",
@@ -608,13 +608,13 @@ export const projects: Project[] = [
       outcome: {
         heading: "Where it got to",
         body: [
-          "Live, static, and structured — 22 URLs in the sitemap covering every service, every guide and the booking page, with the local-business markup a single-location shop needs to be eligible for the pack.",
+          "Live, static, and structured — 23 URLs in the sitemap covering every service, every guide and the booking page, with the local-business markup a single-location shop needs to be eligible for the pack.",
           "Ranking and booking figures need a claimed Google Business Profile and Search Console, neither of which exists yet. Those are on the manual list, not in this column.",
         ],
         metrics: [
-          { value: "22", label: "URLs in the sitemap", note: "Counted on amitblends.com/sitemap-0.xml: home, about, blog index, 7 guides, book, contact, FAQ, gallery, services index, 7 service pages." },
+          { value: "23", label: "URLs in the sitemap", note: "Counted on amitblends.com/sitemap-0.xml: home, about, blog index, 8 guides, book, contact, FAQ, gallery, services index, 7 service pages." },
           { value: "07", label: "Services priced publicly", note: "Each with price and, where it applies, duration, on its own page and in the JSON-LD Offer list." },
-          { value: "07", label: "Direct-answer guides", note: "Published under /blog on the live site. Four more are written and held back to release over the following weeks." },
+          { value: "08", label: "Direct-answer guides", note: "Published under /blog on the live site. Three more are written and released one every two weeks." },
           { value: "CAD", label: "Offer currency in markup", note: "Verified in the live Person/LocalBusiness JSON-LD graph." },
           { value: "Not yet", label: "Local pack ranking", note: "[NEEDS: Google Business Profile claimed and verified, and Search Console connected, before any ranking figure exists.]" },
         ],
