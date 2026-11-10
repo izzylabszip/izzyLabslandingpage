@@ -767,3 +767,33 @@ body.screen-home.has-overlay { overflow: hidden; }
   ::view-transition-old(project-stage), ::view-transition-new(project-stage) { animation: none; }
   .reveal { opacity: 1; translate: none; transition: none; }
 }
+
+/* Scrolling home: hero, then the work, what we do, about and a footer, one page. */
+body.screen-home.home-flow:not(.has-overlay):not(.care-transitioning) { height: auto; min-height: 100dvh; overflow: visible; overflow-x: clip; }
+body.home-flow .work { display: block; position: relative; z-index: 38; padding-top: clamp(6rem, 14vh, 10rem); background: var(--ink); }
+body.home-flow .work .section-kicker a { visibility: hidden; }
+body.home-flow .info-page { position: relative; z-index: 38; }
+body.home-flow:not(.menu-open) .minimal-art { position: absolute; scale: calc(1 - var(--hp, 0) * .22); opacity: calc(1 - var(--hp, 0) * 1.15); }
+body.home-flow:not(.menu-open) .screen-headline { translate: 0 calc(var(--hp, 0) * -110px); opacity: calc(1 - var(--hp, 0) * 1.4); }
+body.home-flow:not(.menu-open) .home-intro { translate: 0 calc(var(--hp, 0) * -60px); opacity: calc(1 - var(--hp, 0) * 1.8); }
+body.home-flow:not(.menu-open) .home-work-list { opacity: calc(1 - var(--hp, 0) * 1.8); }
+.home-scroll-cue { display: none; }
+body.home-flow .home-scroll-cue { position: absolute; z-index: 37; right: 24px; bottom: 1.6rem; display: grid; place-items: center; gap: .5rem; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: #b1b1b8; opacity: calc(1 - var(--hp, 0) * 3); }
+body.home-flow .home-scroll-cue i { display: block; width: 1px; height: 2.6rem; background: linear-gradient(#cfc7ff, transparent); animation: cue 1.8s cubic-bezier(.65,0,.35,1) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+.home-footer { display: none; }
+body.home-flow .home-footer { position: relative; z-index: 38; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem 2rem; padding: clamp(5rem, 10vw, 8rem) clamp(24px, 6vw, 100px) 2rem; background: #000; border-top: 1px solid var(--line); }
+.home-footer-mark { margin: 0; font: 400 clamp(3.4rem, 7vw, 7rem)/.92 var(--display); letter-spacing: -.035em; }
+.home-footer nav { display: flex; flex-direction: column; gap: .55rem; font-size: .95rem; }
+.home-footer nav span { margin-bottom: .6rem; color: #88888f; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+.home-footer nav a { width: fit-content; color: #e8e8ec; transition: color .2s; }
+.home-footer nav a:hover { color: #cfc7ff; }
+.home-footer-base { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 2rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--line); color: #88888f; font-size: .75rem; }
+@media (max-width: 780px) { body.home-flow .home-footer { grid-template-columns: 1fr 1fr; } .home-footer-mark { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { body.home-flow .home-scroll-cue i { animation: none; } }
+/* The hero infinity bleeds past the edge by design; clip it instead of letting the page scroll sideways. */
+body.screen-home.home-flow { overflow-x: clip; }
+.world-switcher { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.world-switcher::-webkit-scrollbar { display: none; }
+body.home-flow:not(.menu-open) .minimal-art { overflow: clip; }

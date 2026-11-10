@@ -344,3 +344,51 @@ body {
   html { scroll-behavior: auto; }
   .motion-ambient { animation: none !important; }
 }
+
+/* Phone fan on the case-study header, same build as the v30 home showcase. */
+.device-fan {
+  --tx: 0;
+  --ty: 0;
+  display: grid;
+  place-items: center;
+  min-height: 30rem;
+  perspective: 1600px;
+}
+.device-fan-phone {
+  --w: clamp(8.5rem, 15vw, 12.5rem);
+  grid-area: 1 / 1;
+  width: var(--w);
+  aspect-ratio: 390 / 844;
+  padding: calc(var(--w) * 0.032);
+  border-radius: calc(var(--w) * 0.15);
+  background: linear-gradient(150deg, #3a3a40 0%, #141417 38%, #050506 100%);
+  box-shadow: 0 2.6rem 4.4rem -1rem rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  transform: translate3d(
+      calc(var(--i) * var(--w) * 0.82 + var(--tx) * (8px + var(--a) * 10px)),
+      calc(var(--a) * 1.5rem + var(--ty) * 8px),
+      calc(var(--a) * -70px)
+    )
+    rotateY(calc(var(--i) * -12deg + var(--tx) * 9deg)) rotateX(calc(var(--ty) * -6deg)) rotateZ(calc(var(--i) * 3deg));
+  transition: transform 0.7s cubic-bezier(0.22, 0.75, 0.25, 1);
+  animation: fan-in 0.9s cubic-bezier(0.22, 0.75, 0.25, 1) both;
+  animation-delay: calc(0.15s + var(--a) * 0.12s);
+}
+.device-fan-phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: calc(var(--w) * 0.12);
+  background: #111;
+}
+@keyframes fan-in {
+  from { opacity: 0; translate: 0 60px; }
+}
+@media (max-width: 640px) {
+  .device-fan { min-height: 24rem; }
+  .device-fan-phone { --w: clamp(7rem, 30vw, 9.5rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .device-fan-phone { transition: none; animation: none; }
+}

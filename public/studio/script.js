@@ -22,7 +22,7 @@ const projects = {
     ],
     href: "https://gloww.dev/",
     slug: "glow",
-    screens: ["/studio/assets/work/glow-1.webp", "/studio/assets/work/glow-2.webp"],
+    screens: ["/studio/assets/work/glow-1.webp", "/studio/assets/work/glow-2.webp", "/studio/assets/work/glow-3.webp"],
     world: "originals",
     linkLabel: "Visit Glow",
     next: "care"
@@ -154,7 +154,7 @@ function setProject(key, focusTab = false) {
   if (!project) return;
   const changed = activeProject !== key || !stage.querySelector(".art-phone");
   const canTransition = changed && typeof document.startViewTransition === "function" && !reduceMotion.matches
-    && !document.hidden && document.body.classList.contains("work-view");
+    && !document.hidden && (document.body.classList.contains("work-view") || document.body.classList.contains("home-flow"));
   if (canTransition) {
     document.startViewTransition(() => applyProject(key, focusTab));
     return;
@@ -224,7 +224,11 @@ function setWorld(world, shouldScroll = false) {
 function openWork(world) {
   location.hash = "world-" + world;
 }
-worldTabs.forEach(tab => tab.addEventListener("click", () => openWork(tab.dataset.worldTab)));
+// On the scrolling home page the world tabs switch in place; in the work view they route.
+worldTabs.forEach(tab => tab.addEventListener("click", () => {
+  if (document.body.classList.contains("home-flow")) setWorld(tab.dataset.worldTab);
+  else openWork(tab.dataset.worldTab);
+}));
 
 projectTabs.forEach((tab, index) => {
   tab.addEventListener("click", () => setProject(tab.dataset.project));
@@ -468,8 +472,21 @@ window.addEventListener("scroll", () => {
 window.addEventListener("resize", updateScroll, { passive: true });
 updateScroll();
 
+// Home hero: the infinity eases back and fades as the page scrolls away from it.
+let heroFrame;
+function updateHeroScroll() {
+  heroFrame = undefined;
+  const progress = document.body.classList.contains("home-flow")
+    ? Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.9))) : 0;
+  document.body.style.setProperty("--hp", reduceMotion.matches ? "0" : progress.toFixed(4));
+}
+window.addEventListener("scroll", () => {
+  if (heroFrame === undefined) heroFrame = requestAnimationFrame(updateHeroScroll);
+}, { passive: true });
+
 // Content routes preserve browser Back and return to the same page after contact.
 let lastContentHash = "#top";
+const homeSections = ["what-we-do", "about-us"];
 function routeView() {
   const hash = location.hash || "#top";
   if (hash === "#contact") {
@@ -485,9 +502,14 @@ function routeView() {
   const infoTitles = {"#what-we-do": "What we do", "#about-us": "About us", "#latest-news": "Latest news"};
   const infoPage = Object.hasOwn(infoTitles, hash) ? document.querySelector(hash) : null;
   lastContentHash = isWork || infoPage || isCare ? hash : "#top";
+  const isHome = !isWork && !infoPage && !isCare;
   document.body.classList.toggle("work-view", isWork);
   document.body.classList.toggle("info-view", Boolean(infoPage));
-  document.querySelectorAll(".info-page").forEach(page => { page.hidden = page !== infoPage; });
+  document.body.classList.toggle("home-flow", isHome);
+  // The home page scrolls through the work, what-we-do and about sections; the menu still opens each on its own.
+  document.querySelectorAll(".info-page").forEach(page => {
+    page.hidden = isHome ? !homeSections.includes(page.id) : page !== infoPage;
+  });
   closeMenu();
   if (isCare) {
     document.title = "CareNearby — An izzyLabs original";
@@ -506,6 +528,8 @@ function routeView() {
     infoPage.querySelector("h1").focus({preventScroll: true});
   } else {
     document.title = "izzyLabs — we build future";
+    setWorld(activeWorld);
+    updateHeroScroll();
     const target = document.getElementById(hash.slice(1)) || document.querySelector("#top");
     requestAnimationFrame(() => {
       target.scrollIntoView({behavior: reduceMotion.matches ? "instant" : "smooth"});
@@ -696,7 +720,7 @@ document.addEventListener("contentroutechange", () => {
 // Info pages: blocks rise in as they enter the viewport.
 (() => {
   if (reduceMotion.matches || !("IntersectionObserver" in window)) return;
-  const items = document.querySelectorAll(".capability-list article, .about-statement, .about-worlds article, .info-end");
+  const items = document.querySelectorAll(".work-heading, .world-switcher, .project-showcase, .info-heading, .capability-list article, .about-statement, .about-worlds article, .info-end, .home-footer > :not(.home-footer-base)");
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("is-in");
