@@ -149,7 +149,7 @@ export function LamiRoom() {
         lead="Everything a family needs between the first introduction and the wedding day, handled by staff rather than an algorithm."
         className="bg-band"
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="m-rail grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <ScanReveal key={s.en} delay={(i % 3) * 0.08} className="h-full" innerClassName="h-full">
               <div className="card flex h-full flex-col p-6">
@@ -231,7 +231,7 @@ export function LamiRoom() {
         lead="Matchmakers, an astrologer and vastu specialist, a legal advisor and database staff. The platform routes to them, it does not replace them."
         className="bg-band"
       >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="m-rail grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {TEAM.map((t, i) => (
             <ScanReveal key={t.name} delay={(i % 3) * 0.07} className="h-full" innerClassName="h-full">
               <div className="card flex h-full items-center gap-4 p-5">
@@ -257,7 +257,7 @@ export function LamiRoom() {
         title="Built to hand off to humans"
         lead="Every enquiry routes to a real matchmaker on WhatsApp, phone or social, because this business closes on conversations rather than checkouts."
       >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="m-rail grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {CHANNELS.map((c, i) => (
             <ScanReveal key={c.href} delay={(i % 3) * 0.07}>
               <a

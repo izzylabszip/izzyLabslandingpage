@@ -181,7 +181,7 @@ export function GlowRoom() {
         center
         className="bg-band"
       >
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="m-rail m-rail-sm grid grid-cols-2 gap-4 sm:grid-cols-3">
           {OCCASIONS.map((o, i) => (
             <ScanReveal key={o.name} delay={(i % 3) * 0.08} amount={0.3}>
               <div
@@ -268,7 +268,7 @@ export function GlowRoom() {
         }
         center
       >
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="m-rail m-rail-sm grid grid-cols-2 gap-4 md:grid-cols-4">
           {LOOKS.map((l, i) => (
             <ScanReveal key={l.name} delay={(i % 4) * 0.07} amount={0.3}>
               <div
@@ -297,7 +297,7 @@ export function GlowRoom() {
         center
         className="bg-band"
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="m-rail grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TRUST.map((t, i) => (
             <ScanReveal key={t.title} delay={(i % 3) * 0.08} className="h-full" innerClassName="h-full">
               <div className="card h-full p-6">

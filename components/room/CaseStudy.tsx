@@ -1,6 +1,6 @@
 import type { Project } from "@/lib/projects-data";
 import { ScanReveal } from "@/components/ScanReveal";
-import { AssetFrame } from "./AssetFrame";
+import { workMedia } from "@/lib/work-media";
 
 /**
  * The case study, on the studio's own dark shell rather than the product's.
@@ -29,10 +29,10 @@ export function CaseStudy({ project }: { project: Project }) {
 
       <div className="relative mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
         <ScanReveal>
-          <p className="label text-accent">Case study {"//"} Specimen_{project.index}</p>
+          <p className="label text-accent">Case study / {project.index}</p>
           <h2
             id="case-study-heading"
-            className="mt-5 max-w-3xl text-3xl font-semibold tracking-tight text-fg md:text-4xl"
+            className="studio-display mt-5 max-w-3xl text-4xl text-fg md:text-6xl"
           >
             {project.name}: {project.role}
           </h2>
@@ -175,19 +175,22 @@ export function CaseStudy({ project }: { project: Project }) {
           </dl>
         </ScanReveal>
 
-        {/* Assets */}
+        {/* Real screens. Unfilled shot briefs stay in projects-data as a to-do list, not on the page. */}
         <div className="mt-16 border-t border-hairline pt-10 md:mt-20">
           <ScanReveal>
-            <h3 className="text-2xl font-semibold tracking-tight text-fg">From the product</h3>
-            <p className="mt-3 max-w-2xl leading-relaxed text-muted">
-              Real screens only. Where a frame below is empty it is because the shot has not been
-              taken yet, and the frame carries the brief for it.
-            </p>
+            <h3 className="studio-display text-4xl text-fg md:text-5xl">From the product</h3>
+            <p className="mt-3 max-w-2xl leading-relaxed text-muted">Real screens, captured from the live product.</p>
           </ScanReveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cs.assets.map((asset, i) => (
-              <ScanReveal key={asset.id} delay={Math.min(i, 3) * 0.08}>
-                <AssetFrame asset={asset} />
+          <div className="m-rail mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {workMedia[project.slug].gallery.map((shot, i) => (
+              <ScanReveal key={shot.src} delay={Math.min(i, 3) * 0.08}>
+                <figure className="min-w-0">
+                  <div className="device-frame">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- pre-sized static screenshots */}
+                    <img src={shot.src} alt={shot.caption} width={390} height={844} loading="lazy" decoding="async" />
+                  </div>
+                  <figcaption className="mt-4 text-sm text-muted">{shot.caption}</figcaption>
+                </figure>
               </ScanReveal>
             ))}
           </div>

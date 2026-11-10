@@ -129,7 +129,7 @@ export function AmitRoom() {
         lead="Every service published with what it costs and how long it takes. A price that only exists in a DM is a price nobody can search for."
         className="bg-band"
       >
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="m-rail grid gap-4 md:grid-cols-2">
           {SERVICES.slice(0, 4).map((s, i) => (
             <ScanReveal key={s.name} delay={(i % 2) * 0.08} className="h-full" innerClassName="h-full">
               <div className="card flex h-full flex-col p-6 md:p-7">
@@ -222,7 +222,7 @@ export function AmitRoom() {
         lead="The guides exist because people type these as searches. Each one answers the question before it explains itself, which is the only format that survives being read on a phone outside the shop."
         className="bg-band"
       >
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="m-rail grid gap-3 md:grid-cols-2">
           {GUIDES.map((g, i) => (
             <ScanReveal key={g.href} delay={(i % 2) * 0.07} className="h-full" innerClassName="h-full">
               <a

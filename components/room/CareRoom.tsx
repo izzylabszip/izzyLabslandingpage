@@ -241,7 +241,7 @@ export function CareRoom() {
         }
         className="bg-band"
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="m-rail grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {PLATFORM.map((p, i) => (
             <ScanReveal key={p.title} delay={(i % 3) * 0.08} className="h-full" innerClassName="h-full">
               <div className="card h-full p-6">
@@ -288,7 +288,7 @@ export function CareRoom() {
         lead="Five verified PSWs across Greater Sudbury, each with credentials in plain view."
         className="bg-band"
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="m-rail grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {CAREGIVERS.map((c, i) => (
             <ScanReveal key={c.file} delay={(i % 5) * 0.07} className="h-full" innerClassName="h-full">
               <div className="card h-full p-5 text-center">

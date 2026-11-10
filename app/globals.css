@@ -163,7 +163,8 @@
 
   --font-sans: var(--font-dm), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-studio: var(--font-cormorant), Georgia, serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  /* Readouts used to be monospace; the studio sets them in DM Sans with tabular figures. */
+  --font-mono: var(--font-dm), var(--font-inter), ui-sans-serif, sans-serif;
   --font-product: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
   --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
   --font-condensed: var(--font-bebas), "Haettenschweiler", "Arial Narrow", sans-serif;
@@ -389,9 +390,48 @@ body {
   from { opacity: 0; translate: 0 60px; }
 }
 @media (max-width: 640px) {
-  .device-fan { min-height: 24rem; }
-  .device-fan-phone { --w: clamp(7rem, 30vw, 9.5rem); }
+  .device-fan { min-height: 23rem; margin-inline: -1.25rem; }
+  .device-fan-phone { --w: clamp(8rem, 34vw, 10.5rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   .device-fan-phone { transition: none; animation: none; }
+}
+
+.font-mono { font-variant-numeric: tabular-nums; }
+
+/* A real screenshot in a phone frame (case-study gallery). */
+.device-frame {
+  aspect-ratio: 390 / 844;
+  padding: 3.2%;
+  border-radius: 13% / 6%;
+  background: linear-gradient(150deg, #3a3a40 0%, #141417 38%, #050506 100%);
+  box-shadow: 0 2rem 3.5rem -1rem rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.device-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10.5% / 4.9%;
+  background: #111;
+}
+
+/* On phones, long card stacks become swipe rails instead of a mile of single-file cards. */
+@media (max-width: 640px) {
+  .m-rail {
+    display: flex;
+    gap: 0.875rem;
+    margin-inline: -1.25rem;
+    padding: 0 1.25rem 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .m-rail::-webkit-scrollbar { display: none; }
+  .m-rail > * { flex: 0 0 80%; scroll-snap-align: start; min-width: 0; }
+  .m-rail.m-rail-sm > * { flex-basis: 44%; }
+  .m-rail > * > * { height: 100%; }
 }

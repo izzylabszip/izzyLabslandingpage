@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/projects-data";
 import { ScanReveal } from "@/components/ScanReveal";
 
-/** Back out of the room into the studio: build notes, then the next specimen. */
+/** Back out of the room into the studio: build notes, then the next project. */
 export function StudioOutro({
   project,
   prev,
@@ -44,7 +44,7 @@ export function StudioOutro({
               href={`/work/${prev.slug}`}
               className="group panel p-6 transition-colors hover:border-accent-dim md:p-7"
             >
-              <p className="label text-muted">← Previous specimen</p>
+              <p className="label text-muted">← Previous project</p>
               <p className="mt-4 text-2xl font-semibold tracking-tight text-fg transition-colors group-hover:text-accent">
                 {prev.name}
               </p>
@@ -54,7 +54,7 @@ export function StudioOutro({
               href={`/work/${next.slug}`}
               className="group panel p-6 text-right transition-colors hover:border-accent-dim md:p-7"
             >
-              <p className="label text-muted">Next specimen →</p>
+              <p className="label text-muted">Next project →</p>
               <p className="mt-4 text-2xl font-semibold tracking-tight text-fg transition-colors group-hover:text-accent">
                 {next.name}
               </p>
@@ -68,7 +68,7 @@ export function StudioOutro({
             <div>
               <p className="label text-accent">Your product next</p>
               <p className="mt-3 text-2xl font-semibold tracking-tight text-fg md:text-3xl">
-                Want a room like this one?
+                Have something like this in mind?
               </p>
             </div>
             <Link
