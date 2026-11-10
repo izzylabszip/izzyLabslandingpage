@@ -39,53 +39,56 @@
 
 /* glow-landing-five.vercel.app — warm cream, rose, gold */
 [data-room="glow"] {
-  --room-bg: #fbf7f0;
-  --room-surface: #ffffff;
-  --room-band: #f5f0e8;
-  --room-ink: #1d1d1f;
-  --room-muted: #6b6b6b;
-  --room-line: rgba(29, 29, 31, 0.1);
+  /* Dark take on Glow's cream-and-rose: same rose and gold, on a deep plum. */
+  --room-bg: #120c0f;
+  --room-surface: #1b1317;
+  --room-band: #160f12;
+  --room-ink: #f7eef1;
+  --room-muted: #b9a9b0;
+  --room-line: rgba(255, 255, 255, 0.1);
 
-  --accent: #c4617a;
-  --accent-bright: #d97a91;
-  --accent-dim: #e9a0b1;
-  --accent-soft: rgba(217, 122, 145, 0.12);
+  --accent: #e08aa0;
+  --accent-bright: #f0a3b6;
+  --accent-dim: #c4617a;
+  --accent-soft: rgba(224, 138, 160, 0.14);
   --gold: #d4af37;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 /* ca.carenearby.app — warm off-white, trust green */
 [data-room="carenearby"] {
-  --room-bg: #f4f1ea;
-  --room-surface: #ffffff;
-  --room-band: #ede9de;
-  --room-ink: #0a0a0a;
-  --room-muted: #5a5a5a;
-  --room-line: rgba(10, 10, 10, 0.1);
+  /* Dark take on CareNearby's bone-and-green: the trust green, on deep forest. */
+  --room-bg: #07130e;
+  --room-surface: #0d1c16;
+  --room-band: #0a1812;
+  --room-ink: #eef5f0;
+  --room-muted: #9fb3a8;
+  --room-line: rgba(255, 255, 255, 0.1);
 
-  --accent: #057a55;
-  --accent-bright: #0ea56f;
-  --accent-dim: #034e36;
-  --accent-soft: rgba(14, 165, 111, 0.14);
+  --accent: #2fbc90;
+  --accent-bright: #4fd6a8;
+  --accent-dim: #057a55;
+  --accent-soft: rgba(47, 188, 144, 0.14);
   --gold: #ffd66b;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 /* laminepal.com.np — white, red, orange, gold */
 [data-room="lami-nepal"] {
-  --room-bg: #ffffff;
-  --room-surface: #ffffff;
-  --room-band: #f3f4f6;
-  --room-ink: #1f2937;
-  --room-muted: #4b5563;
-  --room-line: #e5e7eb;
+  /* Dark take on Lami Nepal's white-red-orange: the same red and orange, on deep maroon. */
+  --room-bg: #140909;
+  --room-surface: #1d0f0f;
+  --room-band: #180c0c;
+  --room-ink: #f6eeee;
+  --room-muted: #b9a3a3;
+  --room-line: rgba(255, 255, 255, 0.1);
 
-  --accent: #dc2626;
+  --accent: #ef4444;
   --accent-bright: #f97316;
   --accent-dim: #b91c1c;
-  --accent-soft: rgba(220, 38, 38, 0.1);
+  --accent-soft: rgba(239, 68, 68, 0.14);
   --gold: #d4a24c;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 /* amitblends.com — ink, flame orange, wood tan. The only room that is dark,

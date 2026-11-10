@@ -156,7 +156,11 @@ function setProject(key, focusTab = false) {
   const canTransition = changed && typeof document.startViewTransition === "function" && !reduceMotion.matches
     && !document.hidden && (document.body.classList.contains("work-view") || document.body.classList.contains("home-flow"));
   if (canTransition) {
-    document.startViewTransition(() => applyProject(key, focusTab));
+    const transition = document.startViewTransition(() => applyProject(key, focusTab));
+    // A newer switch skips this one with AbortError; the DOM update still lands. Anything else is real.
+    const ignoreSkip = error => { if (error && error.name !== "AbortError") console.error(error); };
+    transition.ready.catch(ignoreSkip);
+    transition.finished.catch(ignoreSkip);
     return;
   }
   applyProject(key, focusTab, changed);
@@ -730,3 +734,84 @@ document.addEventListener("contentroutechange", () => {
 })();
 
 if (!stage.querySelector(".art-phone")) applyProject(activeProject, false, true);
+
+
+// Hover previews for Glow, Lami Nepal and Amit Blends, in the spirit of the CareNearby one:
+// a full-screen themed backdrop with the product's real screens, and a card that opens the project.
+(() => {
+  const backdrop = document.querySelector("[data-hover-backdrop]");
+  const card = document.querySelector("[data-hover-card]");
+  if (!backdrop || !card) return;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const keys = ["glow", "lami", "amit"];
+  let current = null, hideTimer = 0;
+
+  function fill(key) {
+    if (current === key) return;
+    current = key;
+    const project = projects[key];
+    backdrop.dataset.theme = key;
+    card.dataset.theme = key;
+    backdrop.querySelector("[data-hover-word]").textContent = project.artWord;
+    renderDevices(backdrop.querySelector("[data-hover-devices]"), project);
+    const art = card.querySelector("[data-hover-art]");
+    const img = document.createElement("img");
+    img.src = project.screens[Math.floor(project.screens.length / 2)];
+    img.alt = "";
+    const icon = document.createElement("span");
+    icon.className = "brand-tile " + key + "-tile";
+    art.replaceChildren(img, icon);
+    card.querySelector("[data-hover-type]").textContent = project.type;
+    card.querySelector("[data-hover-title]").textContent = project.title + ".";
+    card.setAttribute("aria-label", "Open " + project.title);
+  }
+  function show(key) {
+    clearTimeout(hideTimer);
+    const onHero = document.body.classList.contains("menu-open")
+      || (document.body.classList.contains("home-flow") && window.scrollY < window.innerHeight * 0.5);
+    if (!onHero) return;
+    document.body.classList.remove("care-preview-active");
+    fill(key);
+    document.body.classList.add("project-preview-active");
+    card.setAttribute("aria-hidden", "false");
+    card.tabIndex = 0;
+  }
+  function hide() {
+    clearTimeout(hideTimer);
+    document.body.classList.remove("project-preview-active");
+    card.setAttribute("aria-hidden", "true");
+    card.tabIndex = -1;
+  }
+  const deferHide = () => { clearTimeout(hideTimer); hideTimer = setTimeout(hide, 1200); };
+
+  document.querySelectorAll("[data-home-project]").forEach(link => {
+    const key = link.dataset.homeProject;
+    if (!keys.includes(key)) {
+      link.addEventListener("pointerenter", hide);
+      return;
+    }
+    link.addEventListener("pointerenter", () => { if (finePointer.matches) show(key); });
+    link.addEventListener("pointerleave", deferHide);
+    link.addEventListener("focus", () => { if (link.matches(":focus-visible")) show(key); });
+    link.addEventListener("blur", deferHide);
+  });
+  card.addEventListener("pointerenter", () => clearTimeout(hideTimer));
+  card.addEventListener("pointerleave", deferHide);
+  card.addEventListener("focus", () => clearTimeout(hideTimer));
+  card.addEventListener("blur", deferHide);
+  card.addEventListener("click", event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const key = current;
+    hide();
+    if (key) openProject(key);
+  });
+  document.querySelector(".menu-toggle").addEventListener("click", hide);
+  document.addEventListener("keydown", event => { if (event.key === "Escape") hide(); });
+  document.addEventListener("pointerdown", event => {
+    if (!card.contains(event.target) && !event.target.closest("[data-home-project]")) hide();
+  });
+  window.addEventListener("scroll", () => {
+    if (document.body.classList.contains("project-preview-active") && window.scrollY > window.innerHeight * 0.5) hide();
+  }, { passive: true });
+})();

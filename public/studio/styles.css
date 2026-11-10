@@ -797,3 +797,39 @@ body.screen-home.home-flow { overflow-x: clip; }
 .world-switcher { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
 .world-switcher::-webkit-scrollbar { display: none; }
 body.home-flow:not(.menu-open) .minimal-art { overflow: clip; }
+
+/* Hover previews for Glow, Lami Nepal and Amit Blends (CareNearby has its own in care.css). */
+.project-hover-backdrop { --phb: #1a0d12; --phb-glow: rgba(217,122,145,.45); position: fixed; inset: 0; z-index: 37; overflow: hidden; pointer-events: none; opacity: 0; visibility: hidden; background: radial-gradient(ellipse 55% 75% at 64% 50%, var(--phb-glow), transparent 70%), var(--phb); transition: opacity .6s ease, visibility .6s; }
+.project-hover-backdrop[data-theme="lami"], .project-hover-cover[data-theme="lami"] { --phb: #1a0707; --phb-glow: rgba(220,38,38,.5); }
+.project-hover-backdrop[data-theme="amit"], .project-hover-cover[data-theme="amit"] { --phb: #120a06; --phb-glow: rgba(226,102,44,.42); }
+.project-hover-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000a, transparent 45%), linear-gradient(#0006, transparent 22%); }
+.phb-word { position: absolute; left: 4vw; bottom: -2vw; font: 400 clamp(9rem, 24vw, 30rem)/.8 var(--display); letter-spacing: -.06em; color: rgba(255,255,255,.09); white-space: nowrap; translate: -3vw 0; transition: translate 1.2s cubic-bezier(.22,.75,.15,1); }
+.phb-devices { --tx: 0; --ty: 0; --lift: 0px; position: absolute; inset: 8vh 0 6vh 34%; display: grid; place-items: center; perspective: 1800px; }
+.phb-devices .art-phone { --w: clamp(11rem, 15vw, 17rem); opacity: 0; translate: 0 70px; transition: transform .7s cubic-bezier(.22,.75,.25,1), opacity .7s ease, translate 1s cubic-bezier(.22,.75,.15,1); transition-delay: calc(var(--a) * 90ms); }
+.project-preview-active .project-hover-backdrop { opacity: 1; visibility: visible; }
+.project-preview-active .phb-word { translate: 0 0; }
+.project-preview-active .phb-devices .art-phone { opacity: 1; translate: 0 0; }
+.project-preview-active .home-intro, .project-preview-active .screen-headline, .project-preview-active .minimal-art, .project-preview-active .home-scroll-cue { opacity: 0 !important; }
+.project-preview-active.menu-open .mobile-menu { background: transparent; z-index: 38; color: white; }
+.project-preview-active.menu-open .menu-note { opacity: 0; pointer-events: none; }
+
+.project-hover-cover { --phb: #1a0d12; --phb-glow: rgba(217,122,145,.45); position: fixed; right: 24px; bottom: 24px; z-index: 45; width: clamp(250px, 25vw, 370px); aspect-ratio: 1.6; overflow: hidden; border: 1px solid #ffffff28; border-radius: 12px; color: #fff; background: radial-gradient(ellipse at 70% 30%, var(--phb-glow), transparent 75%), var(--phb); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(18px) scale(.97); transition: opacity .45s ease, visibility .45s, transform .55s cubic-bezier(.22,.75,.15,1); }
+.project-preview-active .project-hover-cover { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+.phc-art { position: absolute; inset: 0; }
+.phc-art img { position: absolute; right: 7%; top: 9%; width: 29%; border-radius: 12px; box-shadow: 0 1.2rem 2rem rgba(0,0,0,.5), 0 0 0 4px #111; rotate: 6deg; transition: translate .6s cubic-bezier(.22,.75,.15,1), rotate .6s cubic-bezier(.22,.75,.15,1); }
+.project-hover-cover:hover .phc-art img { translate: 0 -8px; rotate: 3deg; }
+.phc-art .brand-tile { --logo-size: 2.4rem; position: absolute; left: 18px; top: 16px; border-radius: 24%; }
+.project-hover-cover::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, #000d); pointer-events: none; }
+.project-hover-cover > div:last-child { position: absolute; inset: auto 40% 14px 18px; z-index: 1; }
+.project-hover-cover > div:last-child > span { display: block; margin-bottom: .4rem; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #ffffffb3; }
+.project-hover-cover strong { display: block; font: 400 30px/1 var(--display); letter-spacing: -.02em; }
+.project-hover-cover p { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 0; font: 11px/1.4 var(--sans); }
+.project-hover-cover p span { font-size: 16px; }
+.project-hover-cover:focus-visible { outline: 2px solid #cfc7ff; outline-offset: 5px; }
+@media (max-width: 600px) { .project-hover-cover { right: 16px; bottom: 16px; width: min(280px, 72vw); } }
+@media (prefers-reduced-motion: reduce) {
+  .project-hover-backdrop, .project-hover-cover, .phb-word, .phb-devices .art-phone, .phc-art img { transition: none; }
+}
+.project-preview-active.menu-open .site-header, .project-preview-active.menu-open .header-location { color: white; }
+.project-preview-active.menu-open .header-contact b { background: #ffffff24; color: white; }
+.screen-home.project-preview-active.menu-open .site-header .menu-toggle { color: white; border-color: #ffffff60; }

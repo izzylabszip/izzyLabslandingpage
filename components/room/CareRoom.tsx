@@ -149,7 +149,7 @@ export function CareRoom() {
                     {CAREGIVERS.slice(0, 3).map((c) => (
                       <div
                         key={c.file}
-                        className="flex items-center gap-3 rounded-xl border border-ink/8 bg-[#E8F5EE] p-2.5"
+                        className="flex items-center gap-3 rounded-xl border border-ink/8 bg-accent/10 p-2.5"
                       >
                         <Image
                           src={`/projects/carenearby/${c.file}.jpg`}

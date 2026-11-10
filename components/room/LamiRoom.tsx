@@ -83,7 +83,7 @@ export function LamiRoom() {
         <div
           aria-hidden
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #B91C1C, #F97316)" }}
+          style={{ background: "radial-gradient(ellipse 70% 90% at 80% 40%, rgba(220,38,38,.45), transparent 70%), linear-gradient(120deg, #1d0909, #2e1006)" }}
         />
         <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 pt-16 md:grid-cols-2 md:px-8 md:pt-20">
           <div className="pb-14 md:pb-24">
@@ -196,7 +196,7 @@ export function LamiRoom() {
             <ScanReveal delay={0.15}>
               <div
                 className="rounded-2xl p-8 text-white"
-                style={{ background: "linear-gradient(140deg, #B91C1C, #F97316)" }}
+                style={{ background: "linear-gradient(140deg, #3b0d0d, #4a1c08)" }}
               >
                 <Image
                   src="/projects/lami-nepal/logo.png"
@@ -237,7 +237,7 @@ export function LamiRoom() {
               <div className="card flex h-full items-center gap-4 p-5">
                 <span
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold text-white"
-                  style={{ background: "linear-gradient(140deg, #DC2626, #F97316)" }}
+                  style={{ background: "linear-gradient(140deg, #3b0d0d, #4a1c08)" }}
                 >
                   {t.name.charAt(0)}
                 </span>

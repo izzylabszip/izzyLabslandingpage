@@ -147,7 +147,7 @@ export function GlowRoom() {
                     ].map((a) => (
                       <div
                         key={a.n}
-                        className="flex items-center gap-3 rounded-xl border border-ink/8 bg-[#FDF0F3] p-2.5"
+                        className="flex items-center gap-3 rounded-xl border border-ink/8 bg-accent/10 p-2.5"
                       >
                         <span className="h-9 w-9 shrink-0 rounded-full bg-accent/25" />
                         <span className="min-w-0 flex-1">
@@ -186,7 +186,7 @@ export function GlowRoom() {
             <ScanReveal key={o.name} delay={(i % 3) * 0.08} amount={0.3}>
               <div
                 className="flex h-32 flex-col justify-end rounded-2xl border border-ink/8 p-5 transition-transform duration-300 hover:-translate-y-1 md:h-40"
-                style={{ background: o.tint }}
+                style={{ background: `linear-gradient(140deg, ${o.tint}1f, transparent 70%), var(--room-surface)` }}
               >
                 <span className="text-base font-semibold tracking-tight">{o.name}</span>
               </div>
@@ -273,9 +273,9 @@ export function GlowRoom() {
             <ScanReveal key={l.name} delay={(i % 4) * 0.07} amount={0.3}>
               <div
                 className="flex h-36 items-end rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1"
-                style={{ background: `linear-gradient(140deg, ${l.from}, ${l.to})` }}
+                style={{ background: `linear-gradient(140deg, ${l.from}2e, ${l.to}66), var(--room-surface)` }}
               >
-                <span className="text-sm font-semibold tracking-tight text-[#1D1D1F]">
+                <span className="text-sm font-semibold tracking-tight text-ink">
                   {l.name}
                 </span>
               </div>
