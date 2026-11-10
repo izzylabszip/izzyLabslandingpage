@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The v30 home design ships as plain browser scripts plus a vendored three.js.
+    "public/studio/**",
   ]),
 ]);
 

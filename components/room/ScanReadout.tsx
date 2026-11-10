@@ -71,7 +71,7 @@ export function ScanReadout({ lines, tone = "studio" }: { lines: Line[]; tone?: 
       </ul>
 
       <p className={cn("mt-6 text-xs leading-relaxed", room ? "text-ink-muted" : "text-muted")}>
-        Illustrative readout. Real scans run on-device first, then a Gemini pass.
+        Illustrative readout. Real scans run on-device checks first, then Glow&apos;s own skin engine.
       </p>
     </div>
   );

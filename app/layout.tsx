@@ -6,11 +6,10 @@ import {
   Instrument_Serif,
   Noto_Sans_Devanagari,
   Bebas_Neue,
+  Cormorant_Garamond,
+  DM_Sans,
 } from "next/font/google";
-import "./globals.css";
 import { site } from "@/lib/site";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
 import { graph, organization, website, ldJson } from "@/lib/schema";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -41,6 +40,22 @@ const bebas = Bebas_Neue({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-bebas",
+  display: "swap",
+});
+
+/** The studio's own type, from the v30 design: Cormorant for display, DM Sans for text. */
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-dm",
   display: "swap",
 });
 
@@ -80,9 +95,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrains.variable} ${jakarta.variable} ${instrument.variable} ${bebas.variable} ${devanagari.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrains.variable} ${jakarta.variable} ${instrument.variable} ${bebas.variable} ${devanagari.variable} ${cormorant.variable} ${dmSans.variable}`}
     >
-      <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
+      {/* No classes here. The home page is the v30 design with its own
+          stylesheet and body classes; every other page gets its shell from
+          app/(site)/layout.tsx. suppressHydrationWarning because the home
+          markup adds body classes before React hydrates. */}
+      <body suppressHydrationWarning>
         {/* The studio's identity, on every page. It lived nowhere before this:
             a crawler or an assistant reading izzylabs.ca had no machine-readable
             statement of what this is, where it is, or what it sells. Individual
@@ -94,9 +113,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: ldJson(graph(organization(), website())),
           }}
         />
-        <Nav />
-        <main className="relative z-10 flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

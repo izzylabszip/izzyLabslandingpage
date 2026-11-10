@@ -121,24 +121,24 @@ export const projects: Project[] = [
     status: "live",
     statusLabel: "LIVE · TESTFLIGHT",
     role: "Product, engineering and QA, end to end",
-    searchTitle: "Expo + Gemini beauty marketplace",
+    searchTitle: "Beauty booking app with its own AI skin scan",
     metaDescription:
-      "Premium beauty marketplace for Nepal. Verified makeup artists and hairstylists, wedding and photoshoot bookings, AI matching and a face-scan finder.",
+      "Beauty booking app: verified makeup artists and hairstylists, wedding and photoshoot bookings, and a free AI skin scan built on Glow's own measured skin engine.",
     links: [
       {
-        label: "glow-app-omega.vercel.app",
-        href: "https://glow-app-omega.vercel.app",
-        kind: "web",
+        label: "gloww.dev",
+        href: "https://gloww.dev",
+        kind: "site",
         primary: true,
       },
       {
-        label: "glow-landing-five.vercel.app",
-        href: "https://glow-landing-five.vercel.app",
-        kind: "site",
+        label: "app.gloww.dev",
+        href: "https://app.gloww.dev",
+        kind: "web",
       },
     ],
     meta: [
-      { label: "Stack", value: "Expo / React Native · Vision Camera · Gemini AI" },
+      { label: "Stack", value: "Expo / React Native · Vision Camera · own skin engine (Python, MediaPipe)" },
       { label: "Status", value: "Live (TestFlight)" },
       { label: "Two-sided", value: "Artist + Client" },
     ],
@@ -199,7 +199,7 @@ export const projects: Project[] = [
           },
           {
             title: "The face scan, which is",
-            body: "Vision Camera captures the frame, on-device checks run first — face present, lighting, framing — and only a frame that passes goes to a Gemini pass for tone and feature reading. Running the cheap deterministic checks before the paid non-deterministic one is what keeps the cost and the latency sane.",
+            body: "Vision Camera captures the frame and on-device checks run first: face present, lighting, framing. The photo then goes to Glow's own skin engine, which maps 478 face landmarks, measures redness, texture, pores, lines, spots and shine zone by zone, and draws heatmaps only where a trained checker is confident. A repeatability gate keeps the same face scoring the same, so progress over time means something.",
           },
           {
             title: "The artist studio",
@@ -217,7 +217,7 @@ export const projects: Project[] = [
       },
       stack: [
         { group: "Mobile", items: ["Expo", "React Native", "React Native Vision Camera", "TypeScript"] },
-        { group: "AI", items: ["Gemini", "On-device pre-checks", "Timeout + fallback handling"] },
+        { group: "AI", items: ["Own skin engine (MediaPipe, OpenCV)", "Trained mark verifier", "On-device pre-checks", "Repeatability gate"] },
         { group: "Web", items: ["Next.js", "Vercel"] },
         { group: "QA", items: ["Scripted regression cases", "Permission-state matrix", "Low-light capture tests"] },
       ],

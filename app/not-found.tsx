@@ -1,25 +1,31 @@
-import Link from "next/link";
-import { ScanReveal } from "@/components/ScanReveal";
+import "./globals.css";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 
+/* Renders in the bare root layout, so it brings the site shell itself. */
 export default function NotFound() {
   return (
-    <section className="mx-auto flex min-h-[70svh] max-w-6xl flex-col justify-center px-5 md:px-8">
-      <ScanReveal>
-        <p className="label text-beta">Scan result // 404</p>
-        <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-6xl">
-          No specimen found at this address.
+    <div className="flex min-h-svh flex-col bg-bg font-sans text-fg antialiased">
+      <Nav />
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-5 py-24 md:px-8">
+        <p className="text-xs uppercase tracking-[0.12em] text-muted">404 / izzyLabs</p>
+        <h1 className="studio-display mt-6 text-6xl md:text-8xl">
+          Nothing here.
+          <br />
+          <em>Yet.</em>
         </h1>
-        <p className="mt-5 max-w-md text-muted">
-          The page you asked for is not in the lab. Head back to the studio or open one of the
-          live products.
+        <p className="mt-6 max-w-md text-muted">
+          The page you asked for does not exist. Head back home or open one of our builds.
         </p>
-        <Link
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- home runs its own scripts and needs a full page load */}
+        <a
           href="/"
-          className="label mt-8 inline-flex items-center gap-2 rounded-panel bg-accent px-5 py-3.5 text-bg"
+          className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-fg px-6 py-3 text-sm text-bg"
         >
-          Return to studio <span aria-hidden>→</span>
-        </Link>
-      </ScanReveal>
-    </section>
+          Back to izzyLabs <span aria-hidden>↗</span>
+        </a>
+      </main>
+      <Footer />
+    </div>
   );
 }

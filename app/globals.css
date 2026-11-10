@@ -1,30 +1,31 @@
 @import "tailwindcss";
 
 /* ================================================================== */
-/* LAYER 1 — izzylabs studio shell (dark, teal, bio-scan)             */
+/* LAYER 1 — izzylabs studio shell. Palette from the v30 design         */
+/* (public/studio/styles.css): near-black ink, paper white, lavender. */
 /* ================================================================== */
 :root {
-  --bg-primary: #0a0b0d;
-  --bg-elevated: #121417;
-  --border-hairline: #23262b;
-  --text-primary: #f2f3f5;
-  --text-secondary: #8b9198;
+  --bg-primary: #08090a;
+  --bg-elevated: #101114;
+  --border-hairline: #2a2b2f;
+  --text-primary: #f4f4f4;
+  --text-secondary: #b1b1b8;
 
-  --accent: #3fe0c5;
-  --accent-bright: #3fe0c5;
-  --accent-dim: #1e7a6c;
-  --accent-soft: rgba(63, 224, 197, 0.12);
+  --accent: #cfc7ff;
+  --accent-bright: #e2ddff;
+  --accent-dim: #8f84e0;
+  --accent-soft: rgba(207, 199, 255, 0.12);
 
-  --status-live: #3fe0c5;
+  --status-live: #cfc7ff;
   --status-beta: #e0b93f;
 
   /* Room surface tokens default to the dark shell so utilities are always valid. */
-  --room-bg: #0a0b0d;
-  --room-surface: #121417;
-  --room-band: #121417;
-  --room-ink: #f2f3f5;
-  --room-muted: #8b9198;
-  --room-line: #23262b;
+  --room-bg: #08090a;
+  --room-surface: #101114;
+  --room-band: #101114;
+  --room-ink: #f4f4f4;
+  --room-muted: #b1b1b8;
+  --room-line: #2a2b2f;
   --gold: #d4a24c;
 
   --radius: 8px;
@@ -157,7 +158,8 @@
   --color-ink-muted: var(--room-muted);
   --color-line: var(--room-line);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-studio: var(--font-cormorant), Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
   --font-product: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
   --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
@@ -237,10 +239,10 @@ body {
 /* Primitives                                                          */
 /* ================================================================== */
 @utility label {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 11px;
   line-height: 1;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -306,6 +308,14 @@ body {
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 0.92;
+}
+
+/* The studio's display face, as in the v30 design headlines. */
+.studio-display {
+  font-family: var(--font-studio);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
 
 /* Italic serif accent, as used by both Glow and CareNearby. */

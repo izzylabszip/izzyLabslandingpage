@@ -34,7 +34,7 @@ export default function ServicesPage() {
         <span className="text-fg">Capabilities</span>
       </nav>
 
-      <h1 className="text-balance text-4xl font-medium tracking-tight md:text-5xl">
+      <h1 className="studio-display text-balance text-5xl md:text-7xl">
         What the studio does
       </h1>
       <p className="mt-6 text-lg text-muted md:text-xl">

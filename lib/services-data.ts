@@ -162,7 +162,7 @@ export const services: Service[] = [
         body: [
           "Most of what is sold as AI app development in Nepal and everywhere else is a wrapper around someone else's API with a chat box on top. That is sometimes the correct build. It is worth knowing that is what you are buying, and worth paying accordingly.",
           "The work that is actually worth contracting out is the part around the model: deciding what goes on-device and what goes to a provider, an evaluation set that catches a regression before a user does, fallbacks for timeouts and outages, and a cost model that does not surprise you in month three when usage triples.",
-          "Glow is the working example on this site — a face scan where the cheap deterministic checks run on the handset first and only a frame worth paying for reaches Gemini, with a manual path behind it so a failed model call never costs a booking. The case study says how it is put together.",
+          "Glow is the working example on this site — a face scan where the cheap deterministic checks run on the handset first and only a frame that passes reaches Glow's own skin engine, with a repeatability gate so the same face scores the same and a manual path behind it so a failed scan never costs a booking. The case study says how it is put together.",
         ],
       },
     ],

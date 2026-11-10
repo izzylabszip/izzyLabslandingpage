@@ -228,7 +228,7 @@ export function GlowRoom() {
             We find your <span className="serif text-accent">perfect</span> artist
           </>
         }
-        lead="No more scrolling through hundreds of profiles. A camera frame goes through on-device analysis and a Gemini pass, and comes back as a shortlist of artists whose work actually fits."
+        lead="No more scrolling through hundreds of profiles. A camera frame goes through on-device checks and Glow's own skin engine, and comes back as a skin reading and a shortlist of artists whose work actually fits."
         className="bg-band"
       >
         <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -246,7 +246,7 @@ export function GlowRoom() {
               <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-line pt-6">
                 <div>
                   <dt className="label text-ink-muted">Pipeline</dt>
-                  <dd className="mt-2 font-semibold">Camera → On-device → Gemini</dd>
+                  <dd className="mt-2 font-semibold">Camera → On-device → Glow skin engine</dd>
                 </div>
                 <div>
                   <dt className="label text-ink-muted">Fallback</dt>

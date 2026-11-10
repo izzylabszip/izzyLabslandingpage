@@ -38,7 +38,7 @@ export function RoomIntro({ project }: { project: Project }) {
           <div className="lg:col-span-7">
             <ScanReveal delay={0.1} duration={0.7}>
               <div className="flex flex-wrap items-center gap-4">
-                <h1 className="text-4xl font-semibold tracking-[-0.03em] text-fg md:text-6xl">
+                <h1 className="studio-display text-5xl text-fg md:text-7xl">
                   {project.name}
                 </h1>
                 <StatusPill status={project.status} label={project.statusLabel} />
