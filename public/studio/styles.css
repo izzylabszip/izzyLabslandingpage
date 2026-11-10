@@ -106,9 +106,7 @@ em { font-family: var(--display); font-weight: 400; }
 .art-word { position: absolute; left: 50%; top: 50%; max-width: 100%; transform: translate(-50%,-34%); font: clamp(7rem,17.5vw,23rem)/.9 var(--display); letter-spacing: -.075em; color: rgba(255,255,255,.19); white-space: nowrap; pointer-events: none; }
 [data-theme="care"] .art-word { font-size: clamp(6rem,14vw,18rem); }
 [data-theme="lami"] .art-word { font-size: clamp(7rem,18vw,23rem); }
-.brand-tile { --logo-size: clamp(10rem,16vw,16rem); width: var(--logo-size); height: var(--logo-size); flex: 0 0 auto; border-radius: 27%; background-image: url("./assets/supplied-brand-sheet-1.png"); background-size: calc(var(--logo-size) * 567 / 193) calc(var(--logo-size) * 642 / 193); background-repeat: no-repeat; background-position: calc(var(--logo-size) * -318 / 193) calc(var(--logo-size) * -57 / 193); box-shadow: 0 2rem 3rem rgba(0,0,0,.36); }
-.care-tile { background-position: calc(var(--logo-size) * -46 / 193) calc(var(--logo-size) * -366 / 193); }
-.lami-tile { background-position: calc(var(--logo-size) * -46 / 193) calc(var(--logo-size) * -57 / 193); }
+.brand-tile { --logo-size: clamp(10rem,16vw,16rem); width: var(--logo-size); height: var(--logo-size); flex: 0 0 auto; border-radius: 27%; box-shadow: 0 2rem 3rem rgba(0,0,0,.36); }
 .feature-art .brand-tile { position: absolute; left: 50%; top: 47%; transform: translate(-50%,-50%) rotate(-8deg); transition: transform .8s cubic-bezier(.22,.75,.25,1); }
 .feature-art:hover .brand-tile { transform: translate(-50%,-55%) rotate(-3deg); }
 .stage-copy { display: flex; flex-direction: column; align-items: start; min-width: 0; padding: 1.65rem 0 1.65rem 3.4rem; }
@@ -723,10 +721,49 @@ body.screen-home.has-overlay { overflow: hidden; }
 .news-empty p { margin: 0 0 8px; color: #aaa; font: 400 16px/1.4 var(--sans); }
 .news-empty p:first-child { color: #f4f4f4; }
 
-/* Amit Blends: a client site, not an app, so its tile is set in type instead of cut from the icon sheet. */
+/* Amit Blends theme. */
 .project-stage[data-theme="amit"] { --art: #1a120c; --art-glow: rgba(226,102,44,.28); }
 [data-theme="amit"] .art-word { font-size: clamp(6rem,14vw,18rem); }
 .detail-hero[data-detail-theme="amit"] { background: radial-gradient(ellipse at right,#5a2a12,transparent 80%),#1a120c; }
-.brand-tile.amit-tile { background: linear-gradient(160deg,#1f1813,#0d0b09); display: grid; place-items: center; box-shadow: 0 2rem 3rem rgba(0,0,0,.36), inset 0 0 0 1px rgba(226,102,44,.35); }
-.brand-tile.amit-tile::after { content: "AB"; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: calc(var(--logo-size) * .42); line-height: 1; color: #e2662c; letter-spacing: -.02em; }
 @media (max-width: 780px) { [data-theme="amit"] .art-word { font-size: 25vw; } }
+
+/* Project icons: the real 1024px app icons, not crops of a phone screenshot. */
+.brand-tile { background: center / cover no-repeat url("./assets/work/glow-icon.webp"); }
+.brand-tile.glow-tile { background-image: url("./assets/work/glow-icon.webp"); }
+.brand-tile.care-tile { background-image: url("./assets/work/care-icon.webp"); }
+.brand-tile.lami-tile { background-image: url("./assets/work/lami-icon.webp"); }
+.brand-tile.amit-tile { background-image: url("./assets/work/amit-icon.webp"); }
+
+/* Project art: the icon becomes a small badge, the real screens take the stage. */
+.art-brand { display: inline-flex; align-items: center; gap: .85rem; }
+.feature-art .brand-tile { --logo-size: 2.6rem; position: static; transform: none; border-radius: 24%; box-shadow: 0 .6rem 1.4rem rgba(0,0,0,.35); animation: none; }
+.feature-art:hover .brand-tile { transform: none; }
+.art-devices { --tx: 0; --ty: 0; --lift: 0px; position: absolute; inset: 3rem 0 6rem; z-index: 1; display: grid; place-items: center; perspective: 1600px; pointer-events: none; }
+.feature-art:hover .art-devices { --lift: -14px; }
+.art-phone { --w: clamp(8.5rem, 13vw, 11.6rem); grid-area: 1 / 1; width: var(--w); aspect-ratio: 390 / 844; padding: calc(var(--w) * .032); border-radius: calc(var(--w) * .15); background: linear-gradient(150deg, #3a3a40 0%, #141417 38%, #050506 100%); box-shadow: 0 2.6rem 4.4rem -1rem rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.14) inset, 0 0 0 calc(var(--w) * .008) rgba(255,255,255,.05); transform-style: preserve-3d; transform: translate3d(calc(var(--i) * var(--w) * .82 + var(--tx) * (8px + var(--a) * 10px)), calc(var(--a) * 1.5rem + var(--ty) * 8px + var(--lift)), calc(var(--a) * -70px)) rotateY(calc(var(--i) * -12deg + var(--tx) * 9deg)) rotateX(calc(var(--ty) * -6deg)) rotateZ(calc(var(--i) * 3deg)); transition: transform .7s cubic-bezier(.22,.75,.25,1); will-change: transform; }
+.art-phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: calc(var(--w) * .12); background: #111; }
+.art-phone::after { content: ""; position: absolute; inset: calc(var(--w) * .032); border-radius: calc(var(--w) * .12); background: linear-gradient(115deg, rgba(255,255,255,.16), transparent 32%); pointer-events: none; }
+.project-stage.is-changing .art-phone { animation: phone-in .75s cubic-bezier(.22,.75,.25,1) both; animation-delay: calc(var(--a) * 90ms); }
+@keyframes phone-in { from { opacity: 0; translate: 0 48px; } }
+@media (max-width: 780px) {
+  .art-devices { inset: 3rem 0 4rem; }
+  .art-phone { --w: clamp(7.5rem, 31vw, 10rem); }
+}
+
+/* Project switch: the stage cross-dissolves with a short lift (View Transitions where supported). */
+.project-stage { view-transition-name: project-stage; }
+::view-transition-old(project-stage) { animation: vt-out .3s cubic-bezier(.4,0,.2,1) both; }
+::view-transition-new(project-stage) { animation: vt-in .55s cubic-bezier(.22,.75,.25,1) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-8px); filter: blur(6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(14px); filter: blur(8px); } }
+
+/* Info pages: blocks rise in on scroll. */
+.reveal { opacity: 0; translate: 0 28px; transition: opacity .8s ease, translate .9s cubic-bezier(.22,.75,.25,1); }
+.reveal.is-in { opacity: 1; translate: 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .art-phone { transition: none; }
+  .project-stage.is-changing .art-phone { animation: none; }
+  ::view-transition-old(project-stage), ::view-transition-new(project-stage) { animation: none; }
+  .reveal { opacity: 1; translate: none; transition: none; }
+}

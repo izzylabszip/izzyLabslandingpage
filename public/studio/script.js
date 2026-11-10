@@ -22,6 +22,7 @@ const projects = {
     ],
     href: "https://gloww.dev/",
     slug: "glow",
+    screens: ["/studio/assets/work/glow-1.webp", "/studio/assets/work/glow-2.webp"],
     world: "originals",
     linkLabel: "Visit Glow",
     next: "care"
@@ -47,6 +48,7 @@ const projects = {
     ],
     href: "https://carenearby.app/",
     slug: "carenearby",
+    screens: ["/studio/assets/carenearby/services.jpeg", "/studio/assets/carenearby/home.jpeg", "/studio/assets/carenearby/caregivers.jpeg"],
     world: "originals",
     linkLabel: "Visit CareNearby",
     next: "lami"
@@ -72,6 +74,7 @@ const projects = {
     ],
     href: "https://laminepal.com.np/",
     slug: "lami-nepal",
+    screens: ["/studio/assets/work/lami-1.webp", "/studio/assets/work/lami-2.webp"],
     world: "clients",
     linkLabel: "Visit Lami Nepal",
     next: "amit"
@@ -97,6 +100,7 @@ const projects = {
     ],
     href: "https://amitblends.com/",
     slug: "amit-blends",
+    screens: ["/studio/assets/work/amit-2.webp", "/studio/assets/work/amit-1.webp", "/studio/assets/work/amit-3.webp"],
     world: "clients",
     linkLabel: "Visit Amit Blends",
     next: "glow"
@@ -118,9 +122,48 @@ function renderLogo(element, key, title) {
   element.setAttribute("aria-label", title + " app logo");
 }
 
+// Real product screens, fanned in phone frames. Centre phone sits in front.
+function renderDevices(container, project) {
+  const count = project.screens.length;
+  const phones = project.screens.map((src, index) => {
+    const offset = index - (count - 1) / 2;
+    const phone = document.createElement("div");
+    phone.className = "art-phone";
+    phone.style.setProperty("--i", String(offset));
+    phone.style.setProperty("--a", String(Math.abs(offset)));
+    phone.style.zIndex = String(10 - Math.round(Math.abs(offset) * 2));
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "";
+    img.width = 390;
+    img.height = 844;
+    img.decoding = "async";
+    phone.append(img);
+    return phone;
+  });
+  container.replaceChildren(...phones);
+}
+
+// Preload every project's screens once the page is idle so switching never shows an empty frame.
+(window.requestIdleCallback || (fn => setTimeout(fn, 1200)))(() => {
+  Object.values(projects).forEach(project => project.screens.forEach(src => { const img = new Image(); img.src = src; }));
+});
+
 function setProject(key, focusTab = false) {
   const project = projects[key];
   if (!project) return;
+  const changed = activeProject !== key || !stage.querySelector(".art-phone");
+  const canTransition = changed && typeof document.startViewTransition === "function" && !reduceMotion.matches
+    && !document.hidden && document.body.classList.contains("work-view");
+  if (canTransition) {
+    document.startViewTransition(() => applyProject(key, focusTab));
+    return;
+  }
+  applyProject(key, focusTab, changed);
+}
+
+function applyProject(key, focusTab = false, changed = true) {
+  const project = projects[key];
   activeProject = key;
   stage.dataset.theme = key;
   stage.setAttribute("aria-labelledby", "tab-" + key);
@@ -134,6 +177,7 @@ function setProject(key, focusTab = false) {
   stage.querySelector("[data-art-line]").textContent = project.artLine;
   stage.querySelector(".feature-art").setAttribute("aria-label", "Explore the " + project.title + " project");
   renderLogo(stage.querySelector("[data-project-logo]"), key, project.title);
+  if (changed) renderDevices(stage.querySelector("[data-art-devices]"), project);
   const tags = project.meta.map(label => {
     const tag = document.createElement("span");
     tag.textContent = label;
@@ -622,3 +666,43 @@ reduceMotion.addEventListener("change",()=>{cancelAnimationFrame(meteorFrame);dr
 document.addEventListener("contentroutechange", () => {
   if (!document.body.classList.contains("info-view") && !document.body.classList.contains("work-view") && !document.body.classList.contains("case-view")) drawCosmos();
 });
+
+
+// Pointer parallax on the project art: phones turn toward the cursor, with depth by position.
+(() => {
+  const art = document.querySelector(".feature-art");
+  const devices = document.querySelector("[data-art-devices]");
+  if (!art || !devices) return;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  let frame;
+  art.addEventListener("pointermove", event => {
+    if (reduceMotion.matches || !finePointer.matches) return;
+    const rect = art.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      devices.style.setProperty("--tx", x.toFixed(3));
+      devices.style.setProperty("--ty", y.toFixed(3));
+    });
+  });
+  art.addEventListener("pointerleave", () => {
+    cancelAnimationFrame(frame);
+    devices.style.setProperty("--tx", "0");
+    devices.style.setProperty("--ty", "0");
+  });
+})();
+
+// Info pages: blocks rise in as they enter the viewport.
+(() => {
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) return;
+  const items = document.querySelectorAll(".capability-list article, .about-statement, .about-worlds article, .info-end");
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("is-in");
+    observer.unobserve(entry.target);
+  }), { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+  items.forEach(item => { item.classList.add("reveal"); observer.observe(item); });
+})();
+
+if (!stage.querySelector(".art-phone")) applyProject(activeProject, false, true);
