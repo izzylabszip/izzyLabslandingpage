@@ -815,3 +815,80 @@ if (!stage.querySelector(".art-phone")) applyProject(activeProject, false, true)
     if (document.body.classList.contains("project-preview-active") && window.scrollY > window.innerHeight * 0.5) hide();
   }, { passive: true });
 })();
+
+
+// Hero motion: the infinity tilts toward the pointer (or the phone's tilt on Android), never warped.
+(() => {
+  const art = document.querySelector(".minimal-art");
+  if (!art || reduceMotion.matches) return;
+  let frame, tx = 0, ty = 0;
+  const apply = () => {
+    frame = undefined;
+    art.style.setProperty("--hx", tx.toFixed(3));
+    art.style.setProperty("--hy", ty.toFixed(3));
+  };
+  const queue = () => { if (frame === undefined) frame = requestAnimationFrame(apply); };
+  window.addEventListener("pointermove", event => {
+    if (event.pointerType !== "mouse" || !document.body.classList.contains("home-flow")) return;
+    tx = (event.clientX / window.innerWidth - 0.5) * 2;
+    ty = (event.clientY / window.innerHeight - 0.5) * 2;
+    queue();
+  }, { passive: true });
+  // iOS gates orientation behind a permission prompt; we only use it where it is freely available.
+  if ("DeviceOrientationEvent" in window && typeof DeviceOrientationEvent.requestPermission !== "function") {
+    window.addEventListener("deviceorientation", event => {
+      if (event.gamma == null || event.beta == null) return;
+      tx = Math.max(-1, Math.min(1, event.gamma / 25));
+      ty = Math.max(-1, Math.min(1, (event.beta - 45) / 25));
+      queue();
+    }, { passive: true });
+  }
+})();
+
+// Mobile work rail: every build as a swipeable card with its real screens. Tap opens the project.
+(() => {
+  const rail = document.querySelector("[data-work-rail]");
+  const dots = document.querySelector("[data-work-rail-dots]");
+  if (!rail) return;
+  const order = ["glow", "care", "lami", "amit"];
+  const cards = order.map((key, index) => {
+    const project = projects[key];
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "rail-card";
+    card.dataset.theme = key;
+    card.setAttribute("aria-label", "Open " + project.title);
+    const top = document.createElement("div");
+    top.className = "rail-top";
+    const icon = document.createElement("span");
+    icon.className = "brand-tile " + key + "-tile";
+    const type = document.createElement("span");
+    type.textContent = String(index + 1).padStart(2, "0") + " / " + (project.world === "clients" ? "Client" : "Original");
+    top.append(icon, type);
+    const devices = document.createElement("div");
+    devices.className = "rail-devices";
+    renderDevices(devices, project);
+    const copy = document.createElement("div");
+    copy.className = "rail-copy";
+    const title = document.createElement("strong");
+    title.textContent = project.title;
+    const line = document.createElement("p");
+    line.textContent = project.tagline;
+    const open = document.createElement("span");
+    open.className = "rail-open";
+    open.setAttribute("aria-hidden", "true");
+    open.textContent = "↗";
+    copy.append(title, line, open);
+    card.append(top, devices, copy);
+    card.addEventListener("click", () => openProject(key));
+    return card;
+  });
+  rail.replaceChildren(...cards);
+  const dotEls = cards.map(() => document.createElement("i"));
+  dots.replaceChildren(...dotEls);
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    entry.target.classList.toggle("is-active", entry.isIntersecting);
+    if (entry.isIntersecting) dotEls.forEach((dot, i) => dot.classList.toggle("is-on", cards[i] === entry.target));
+  }), { root: rail, threshold: 0.6 });
+  cards.forEach(card => observer.observe(card));
+})();
