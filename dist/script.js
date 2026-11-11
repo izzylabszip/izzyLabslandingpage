@@ -520,9 +520,9 @@ reduceMotion.addEventListener("change", () => updateClock(true));
 
 
 const themeButton = document.querySelector(".theme-toggle");
-let darkMenu = false;
+let darkMenu = true;
 let lightCare = false;
-try { darkMenu = localStorage.getItem("izzylabs-menu-theme") === "dark"; } catch {}
+// Every fresh visit starts dark; light mode is an explicit menu-toggle choice.
 try { lightCare = localStorage.getItem("izzylabs-care-theme") === "light"; } catch {}
 function applyMenuTheme() {
  document.body.classList.toggle("menu-dark", darkMenu);
@@ -583,13 +583,16 @@ function drawCosmos(){
  ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(field,0,0);
 }
 function animateSky(t){
- if(!document.hidden && !document.body.classList.contains("info-view") && !document.body.classList.contains("work-view") && skyVisible){
+ if(!document.hidden && (document.body.classList.contains("menu-open") || (!document.body.classList.contains("info-view") && !document.body.classList.contains("work-view"))) && skyVisible){
  ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(field,0,0);
- if(!reduceMotion.matches && !document.body.classList.contains("menu-open")){
+ if(!reduceMotion.matches){
   if(t>nextMeteor){meteors.push({start:t,x:Math.random()*.7,y:.02+Math.random()*.3,duration:1500+Math.random()*500});nextMeteor=t+4500+Math.random()*3500;}
   meteors=meteors.filter(m=>t-m.start<m.duration);
   for(const m of meteors){
-   const p=(t-m.start)/m.duration,x=(m.x+p*.4)*sw,y=(m.y+p*.42)*sh,len=Math.min(240,sw*.22),dx=len*.85,dy=len*.5;
+   // Keep the trail aligned with its velocity in CSS pixels on every aspect ratio.
+   const p=(t-m.start)/m.duration,travel=sh*.72,drift=travel*.12;
+   const x=m.x*sw+p*drift,y=m.y*sh+p*travel,len=Math.min(180,sh*.18);
+   const distance=Math.hypot(drift,travel),dx=len*drift/distance,dy=len*travel/distance;
    ctx.save();ctx.scale(pixelRatio,pixelRatio);ctx.globalAlpha=Math.min(1,p*8,(1-p)*5);
    const trail=ctx.createLinearGradient(x-dx,y-dy,x,y);trail.addColorStop(0,"rgba(110,164,255,0)");trail.addColorStop(.7,"rgba(164,205,255,.5)");trail.addColorStop(1,"#fff");
    ctx.strokeStyle=trail;ctx.lineCap="round";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-dx,y-dy);ctx.lineTo(x,y);ctx.stroke();
@@ -604,12 +607,18 @@ let skyVisible=true;
 new IntersectionObserver(entries=>{skyVisible=entries[0].isIntersecting;},{threshold:0}).observe(sky);
 function placeSky(){
  const care=document.body.classList.contains("case-view");
- const parent=document.querySelector(care?".care-case:not([hidden]) .care-footer-sky":".minimal-home");
+ const menu=document.body.classList.contains("menu-open");
+ const parent=document.querySelector(menu?".mobile-menu":care?".care-case:not([hidden]) .care-footer-sky":".minimal-home");
  if(!parent)return;
  if(sky.parentElement!==parent)parent.prepend(sky);
  drawCosmos();
 }
 placeSky();
+let skyMenuOpen=document.body.classList.contains("menu-open");
+new MutationObserver(()=>{
+ const open=document.body.classList.contains("menu-open");
+ if(open!==skyMenuOpen){skyMenuOpen=open;placeSky();}
+}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 let skyResize;window.addEventListener("resize",()=>{clearTimeout(skyResize);skyResize=setTimeout(drawCosmos,100);});
 drawCosmos();if(!reduceMotion.matches)meteorFrame=requestAnimationFrame(animateSky);
 reduceMotion.addEventListener("change",()=>{cancelAnimationFrame(meteorFrame);drawCosmos();if(!reduceMotion.matches)meteorFrame=requestAnimationFrame(animateSky);});
