@@ -192,3 +192,20 @@
  .studio-device-scene { position:relative; height:90svh; }
  .studio-case *, .all-work-case * { animation:none !important; transition:none !important; }
 }
+
+/* User-aligned desktop covers, calibrated at 1440 x 810. */
+@media (min-width: 781px) {
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy h2 { translate: -59px 144px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-description { translate: -171px 95px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-category { translate: 134px -89px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy h2 { translate: -85px 140px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-description { translate: 144px 113px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-category { translate: 198px -116px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy h2 { translate: -91px 128px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-description { translate: 64px 89px; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-category { translate: 96px -82px; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .minimal-art { translate: -11px 0px; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .screen-headline { translate: 15px -73px; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .home-intro { translate: -39px 10px; scale: 1.0; transform-origin: center; }
+ .care-hover-cover[data-preview="all"] { translate: 37px 0; scale: .9; transform-origin: center; }
+}
