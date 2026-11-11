@@ -749,3 +749,11 @@ body:not(.menu-dark) .mobile-menu > #cosmos { opacity: 0; }
  .screen-home .header-actions .header-contact span { display: none; }
  .screen-home.menu-open .header-actions .header-location { display: none; }
 }
+
+/* User-aligned mobile homepage, calibrated at 390 x 680. */
+@media (max-width: 780px) {
+ .screen-home:not(.menu-open) .minimal-art { translate: -20px 5px; scale: 1.08; transform-origin: center; }
+ .home-intro { translate: 43px 85px; scale: 1; transform-origin: center; }
+ .home-work-list { translate: -5px 0; scale: 1; transform-origin: center; }
+ .screen-home .screen-headline { translate: 43px -35px; scale: 1; transform-origin: center; }
+}
