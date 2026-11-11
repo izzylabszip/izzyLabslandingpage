@@ -589,10 +589,7 @@ function animateSky(t){
   if(t>nextMeteor){meteors.push({start:t,x:Math.random()*.7,y:.02+Math.random()*.3,duration:1500+Math.random()*500});nextMeteor=t+4500+Math.random()*3500;}
   meteors=meteors.filter(m=>t-m.start<m.duration);
   for(const m of meteors){
-   // Keep the trail aligned with its velocity in CSS pixels on every aspect ratio.
-   const p=(t-m.start)/m.duration,travel=sh*.72,drift=travel*.12;
-   const x=m.x*sw+p*drift,y=m.y*sh+p*travel,len=Math.min(180,sh*.18);
-   const distance=Math.hypot(drift,travel),dx=len*drift/distance,dy=len*travel/distance;
+   const p=(t-m.start)/m.duration,x=(m.x+p*.4)*sw,y=(m.y+p*.42)*sh,len=Math.min(240,sw*.22),dx=len*.85,dy=len*.5;
    ctx.save();ctx.scale(pixelRatio,pixelRatio);ctx.globalAlpha=Math.min(1,p*8,(1-p)*5);
    const trail=ctx.createLinearGradient(x-dx,y-dy,x,y);trail.addColorStop(0,"rgba(110,164,255,0)");trail.addColorStop(.7,"rgba(164,205,255,.5)");trail.addColorStop(1,"#fff");
    ctx.strokeStyle=trail;ctx.lineCap="round";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-dx,y-dy);ctx.lineTo(x,y);ctx.stroke();

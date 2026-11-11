@@ -732,9 +732,10 @@ body:not(.menu-dark) .mobile-menu > #cosmos { opacity: 0; }
 @media (max-width: 780px) {
  .screen-home .minimal-art { inset: 14% 0 12%; }
  .screen-home .infinity-mark { width: min(106cqw,110cqh); }
+ .screen-home:not(.menu-open) .minimal-art { left: 28%; }
  .home-work-list { left: 12px; top: 51%; gap: 7px; }
  .home-work-list button,.home-work-list a { padding: 6px 10px; font-size: 11px; min-height: 34px; }
- .home-intro { left: 55%; right: 12px; top: calc(51dvh - 29vw); width: auto; font-size: clamp(10px,2.8vw,14px); line-height: 1.4; }
+ .home-intro { left: 55%; right: 12px; top: calc(51dvh - 44vw); width: auto; font-size: clamp(10px,2.8vw,14px); line-height: 1.4; }
  .screen-home .screen-headline { left: 17%; top: calc(51dvh + 20vw); bottom: auto; font-size: clamp(34px,9vw,64px); }
  .screen-headline span + span { margin-left: 1.8em; }
  .screen-home .site-header { padding: 12px; grid-template-columns: 1fr auto 1fr; gap: 4px; }
