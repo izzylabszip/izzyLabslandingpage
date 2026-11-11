@@ -193,19 +193,24 @@
  .studio-case *, .all-work-case * { animation:none !important; transition:none !important; }
 }
 
-/* User-aligned desktop covers, calibrated at 1440 x 810. */
+/* User-aligned desktop covers, scaled proportionally from the approved 1440 x 810 composition. */
 @media (min-width: 781px) {
- .care-hover-backdrop[data-preview="glow"] .care-cover-copy h2 { translate: -59px 144px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-description { translate: -171px 95px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-category { translate: 134px -89px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="care"] .care-cover-copy h2 { translate: -85px 140px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-description { translate: 144px 113px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-category { translate: 198px -116px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="lami"] .care-cover-copy h2 { translate: -91px 128px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-description { translate: 64px 89px; scale: 1.0; transform-origin: center; }
- .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-category { translate: 96px -82px; scale: 1.0; transform-origin: center; }
- body.screen-home:not(.menu-open) .minimal-art { translate: -11px 0px; scale: 1.0; transform-origin: center; }
- body.screen-home:not(.menu-open) .screen-headline { translate: 15px -73px; scale: 1.0; transform-origin: center; }
- body.screen-home:not(.menu-open) .home-intro { translate: -39px 10px; scale: 1.0; transform-origin: center; }
- .care-hover-cover[data-preview="all"] { translate: 37px 0; scale: .9; transform-origin: center; }
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy h2 { translate: -4.097222vw 17.777778vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-description { translate: -11.875000vw 11.728395vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="glow"] .care-cover-copy .care-cover-category { translate: 9.305556vw -10.987654vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy h2 { translate: -5.902778vw 17.283951vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-description { translate: 10.000000vw 13.950617vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="care"] .care-cover-copy .care-cover-category { translate: 13.750000vw -14.320988vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy h2 { translate: -6.319444vw 15.802469vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-description { translate: 4.444444vw 10.987654vh; scale: 1.0; transform-origin: center; }
+ .care-hover-backdrop[data-preview="lami"] .care-cover-copy .care-cover-category { translate: 6.666667vw -10.123457vh; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .minimal-art { translate: -0.763889vw 0.000000vh; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .screen-headline { translate: 1.041667vw -9.012346vh; scale: 1.0; transform-origin: center; }
+ body.screen-home:not(.menu-open) .home-intro { translate: -2.708333vw 1.234568vh; scale: 1.0; transform-origin: center; }
+ .care-hover-cover[data-preview="all"] { translate: 2.569444vw 0.000000vh; scale: .9; transform-origin: center; }
+ .care-cover-copy h2 { font-size: 6.46vw; }
+ .care-cover-copy .care-cover-description,.care-cover-copy .care-cover-category { font-size: 1.111111vw; }
+ .care-cover-copy .care-cover-description { width: 20.138889vw; }
+ body.screen-home:not(.menu-open) .home-intro { font-size: 1.111111vw; width: 18.75vw; }
+ .care-hover-cover { right: 1.666667vw; bottom: 2.962963vh; width: 25vw; }
 }
