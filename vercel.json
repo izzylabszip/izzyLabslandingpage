@@ -7,43 +7,55 @@
   "rewrites": [
     {
       "source": "/work/glow",
-      "destination": "/index.html"
+      "destination": "/_routes/work-glow.html"
     },
     {
       "source": "/work/carenearby",
-      "destination": "/index.html"
+      "destination": "/_routes/work-carenearby.html"
     },
     {
       "source": "/work/lami-nepal",
-      "destination": "/index.html"
+      "destination": "/_routes/work-lami-nepal.html"
     },
     {
       "source": "/work",
-      "destination": "/index.html"
+      "destination": "/_routes/work.html"
     },
     {
       "source": "/what-we-do",
-      "destination": "/index.html"
+      "destination": "/_routes/what-we-do.html"
     },
     {
       "source": "/about-us",
-      "destination": "/index.html"
+      "destination": "/_routes/about-us.html"
     },
     {
       "source": "/latest-news",
-      "destination": "/index.html"
+      "destination": "/_routes/latest-news.html"
     },
     {
       "source": "/contact",
-      "destination": "/index.html"
+      "destination": "/_routes/contact.html"
     },
     {
       "source": "/ventures",
-      "destination": "/index.html"
+      "destination": "/_routes/ventures.html"
     },
     {
       "source": "/clients",
-      "destination": "/index.html"
+      "destination": "/_routes/clients.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/services",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/services/:slug",
+      "destination": "/what-we-do",
+      "permanent": true
     }
   ]
 }
