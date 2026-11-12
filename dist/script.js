@@ -147,7 +147,7 @@ function setWorld(world, shouldScroll = false) {
 }
 
 function openWork(world) {
-  location.hash = "world-" + world;
+  navigatePage("#world-" + world);
 }
 worldTabs.forEach(tab => tab.addEventListener("click", () => openWork(tab.dataset.worldTab)));
 
@@ -208,7 +208,7 @@ menuButton.addEventListener("click", () => {
 
 mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
   closeMenu();
-  if (link.hash === location.hash) routeView();
+  if (link.pathname === location.pathname) routeView();
 }));
 document.addEventListener("keydown", event => {
   if (menuButton.getAttribute("aria-expanded") !== "true") return;
@@ -269,11 +269,10 @@ function openProject(key) {
   if (key === "care") {
     if (typeof window.openCareCase === "function") { window.openCareCase(); return; }
     if (projectDialog.open) projectDialog.close();
-    if (location.hash === "#work-carenearby") routeView();
-    else location.hash = "#work-carenearby";
+    navigatePage("#work-carenearby");
     return;
   }
-  location.hash = key === "glow" ? "#work-glow" : "#work-lami";
+  navigatePage(key === "glow" ? "#work-glow" : "#work-lami");
 }
 document.querySelectorAll("[data-open-project]").forEach(button => button.addEventListener("click", () => openProject(activeProject)));
 document.querySelector("[data-next-project]").addEventListener("click", () => openProject(projects[activeProject].next));
@@ -315,7 +314,11 @@ function openEnquiry(service) {
     delete enquiryStatus.dataset.state;
   }
   if (service && !sending) enquiryForm.elements.service.value = service;
-  if (!enquiryDialog.open) enquiryDialog.showModal();
+  const entering = routeId() !== '#contact';
+  navigatePage('#contact');
+  if (entering && !reduceMotion.matches) document.querySelector('.contact-page').animate(
+    [{clipPath:'inset(0 0 0 100%)',transform:'translateX(5%)'}, {clipPath:'inset(0 0 0 0)',transform:'translateX(0)'}],
+    {duration:850,easing:'cubic-bezier(.22,.75,.15,1)'});
   syncScrollLock();
 }
 document.querySelectorAll("[data-open-enquiry]").forEach(button => button.addEventListener("click", () => openEnquiry()));
@@ -393,19 +396,16 @@ updateScroll();
 // Content routes preserve browser Back and return to the same page after contact.
 let lastContentHash = "#top";
 function routeView() {
-  const hash = location.hash || "#top";
-  if (hash === "#contact") {
-    openEnquiry();
-    history.replaceState(null, "", lastContentHash);
-    return;
-  }
+  const hash = routeId();
+  document.body.classList.toggle("contact-view", hash === "#contact");
+
   const casePage = [...document.querySelectorAll('.care-case')].find(page => '#'+page.id === hash);
   const isCare = Boolean(casePage);
   document.body.classList.toggle("case-view", isCare);
   document.body.classList.remove("care-preview-active","work-preview-all");
   document.querySelectorAll('.care-case').forEach(page => {page.hidden = page !== casePage;});
   const isWork = hash === "#world-originals" || hash === "#world-clients";
-  const infoTitles = {"#what-we-do": "What we do", "#about-us": "About us", "#latest-news": "Latest news"};
+  const infoTitles = {"#contact":"Get in touch","#what-we-do": "What we do", "#about-us": "About us", "#latest-news": "Latest news"};
   const infoPage = Object.hasOwn(infoTitles, hash) ? document.querySelector(hash) : null;
   lastContentHash = isWork || infoPage || isCare ? hash : "#top";
   document.body.classList.toggle("work-view", isWork);
@@ -445,10 +445,9 @@ document.querySelector(".wordmark").addEventListener("click", event => {
   if (projectDialog.open) projectDialog.close();
   if (enquiryDialog.open) enquiryDialog.close();
   closeMenu();
-  if (location.hash === "#top") routeView();
-  else location.hash = "#top";
+  navigatePage("#top");
 });
-window.addEventListener("hashchange", routeView);
+window.addEventListener("hashchange", () => { if (pagePaths[location.hash]) history.replaceState(null,"",pagePaths[location.hash]); routeView(); });
 routeView();
 
 document.querySelectorAll("[data-home-project]").forEach(button => button.addEventListener("click", event => {

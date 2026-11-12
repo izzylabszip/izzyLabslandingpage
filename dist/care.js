@@ -16,7 +16,7 @@
   function setPreview(key) {
     if(!covers[key])return;
     previewKey=key;const p=covers[key];
-    preview.href=p.route;preview.setAttribute('aria-label',key==='all'?'Explore all work':'Open '+p.name+' case study');
+    preview.href=pagePath(p.route);preview.setAttribute('aria-label',key==='all'?'Explore all work':'Open '+p.name+' case study');
     preview.dataset.preview=key;backdrop.dataset.preview=key;
     preview.querySelector('img').src=p.image;backdrop.querySelector('img').src=p.image;
     preview.querySelector('strong').textContent=p.name;
@@ -26,7 +26,7 @@
     backdrop.querySelector('.care-cover-description').replaceChildren(...p.copy.flatMap((line,i)=>i?[document.createElement('br'),document.createTextNode(line)]:[document.createTextNode(line)]));
   }
   // Inline SVG avoids missing arrow glyphs in the display/font fallbacks.
-  document.querySelectorAll('.care-help-links [aria-hidden],.care-hover-cover p span').forEach(icon => {
+  document.querySelectorAll('.care-help-links [aria-hidden]').forEach(icon => {
     icon.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 18 18 6M6 6h12v12"/></svg>';
   });
   let hideTimer = 0, transition = null, transitionLayer = null, transitionToken = 0;
@@ -72,10 +72,9 @@
     let raf = 0, reject, done = false;
     const finished = new Promise((resolve, fail) => {
       reject = fail;
-      let last = 0, elapsed = 0;
+      const started = performance.now();
       const tick = now => {
-        elapsed += last ? Math.min(50,Math.max(0,now-last)) : 16;
-        last = now;
+        const elapsed = now - started;
         const progress = Math.min(1,elapsed/duration);
         const eased = progress < .5 ? 4*progress**3 : 1-((-2*progress+2)**3)/2;
         for (const key of ['left','top','width','height','borderRadius']) {
@@ -111,7 +110,7 @@
     const width = Math.min(bounds.width || 280, innerWidth - 32);
     const start = {left:innerWidth-width-16,top:innerHeight-width/1.6-16,width,height:width/1.6};
     if (finePointer.matches && bounds.width) Object.assign(start,{left:bounds.left,top:bounds.top,width:bounds.width,height:bounds.height});
-    const alreadyHere = location.hash === destination;
+    const alreadyHere = routeId() === destination;
     const animate = !motion.matches && !alreadyHere;
     const token = ++transitionToken;
     if (animate) {
@@ -125,7 +124,7 @@
       document.body.classList.add('care-transitioning');
     }
     closeMenu(); hidePreview();
-    const navigate = () => { if (!alreadyHere) history.pushState(null, '', destination); routeView(); };
+    const navigate = () => { if (!alreadyHere) history.pushState(null, '', pagePath(destination)); routeView(); };
     if (!animate) { navigate();transitionDestination=null;return; }
     const frame = r => ({left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});
     const full = {left:0,top:0,width:innerWidth,height:innerHeight};
@@ -154,7 +153,7 @@
     if (!transitionLayer) return;
     const destination=transitionDestination;
     clearTransition();
-    if (destination&&location.hash!==destination) { history.pushState(null, '', destination); routeView(); }
+    if (destination&&routeId()!==destination) { history.pushState(null, '', pagePath(destination)); routeView(); }
   });
   window.addEventListener('popstate', clearTransition);
   // Load locally bundled 3D only when the case study is visited.
@@ -167,7 +166,7 @@
     });
   }
   document.addEventListener('contentroutechange', () => {
-    if (transitionDestination&&location.hash!==transitionDestination) clearTransition();
+    if (transitionDestination&&routeId()!==transitionDestination) clearTransition();
     loadModels();
   });
   loadModels();

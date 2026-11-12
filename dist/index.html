@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -25,16 +26,17 @@
     <link rel="stylesheet" href="./care.css" />
     <link rel="stylesheet" href="./care-journey.css" />
     <link rel="stylesheet" href="./case-studies.css" />
+  <link rel="stylesheet" href="./layout.css" />
   </head>
   <body class="screen-home menu-dark">
-    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="skip-link" href="/">Skip to content</a>
     <div class="page-progress" aria-hidden="true" hidden><span></span></div>
 
     <div class="minimal-art" aria-hidden="true"><div class="infinity-mark"><img class="infinity-image" src="./assets/izzylabs-infinity-chrome.png" alt="" width="1620" height="971" fetchpriority="high" /></div></div>
     <div class="care-hover-backdrop" aria-hidden="true"><img src="./assets/carenearby/logo-cover.webp" alt="" width="1672" height="941" decoding="async" /><div class="care-cover-copy"><h2>CareNearby</h2><p class="care-cover-category">Product Design, Healthcare</p><p class="care-cover-description">Bringing families and caregivers closer.<br />Thoughtfully designed around everyday needs.<br />A simpler way to find care, nearby.</p></div></div>
-    <a class="care-hover-cover" href="#work-carenearby" aria-label="Open CareNearby case study" aria-hidden="true" tabindex="-1"><img src="./assets/carenearby/logo-cover.webp" alt="" width="1672" height="941" decoding="async" /><div><strong>CareNearby</strong><p>Product Design, Healthcare <span aria-hidden="true">↗</span></p></div></a>
+    <a class="care-hover-cover" href="/work/carenearby" aria-label="Open CareNearby case study" aria-hidden="true" tabindex="-1"><img src="./assets/carenearby/logo-cover.webp" alt="" width="1672" height="941" decoding="async" /><div><strong>CareNearby</strong><p>Product Design, Healthcare </p></div></a>
     <header class="site-header" data-header>
-      <a class="wordmark" href="#top" aria-label="izzyLabs home">izzy<span>Labs</span><span class="logo-loop" aria-hidden="true">∞</span></a>
+      <a class="wordmark" href="/" aria-label="izzyLabs home">izzy<span>Labs</span><span class="logo-loop" aria-hidden="true">∞</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
         <span>Menu</span><i></i><i></i>
       </button>
@@ -48,15 +50,15 @@
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
       <div class="menu-left">
         <nav aria-label="Main navigation">
-          <a href="#what-we-do">What we do</a>
-          <a href="#about-us">About us</a>
-          <a href="#latest-news">Latest news</a>
-          <a href="#contact">Get in touch</a>
+          <a href="/what-we-do">What we do</a>
+          <a href="/about-us">About us</a>
+          <a href="/latest-news">Latest news</a>
+          <a href="/contact">Get in touch</a>
         </nav>
-        <div class="menu-projects"><p>Our Builds</p><a href="#work-glow" data-home-project="glow">Glow</a><a href="#work-carenearby" data-home-project="care">CareNearby</a><a href="#work-lami" data-home-project="lami">Lami Nepal</a><a href="#all-work" data-all-work>All work</a></div>
+        <div class="menu-projects"><p>Our Builds</p><a href="/work/glow" data-home-project="glow">Glow</a><a href="/work/carenearby" data-home-project="care">CareNearby</a><a href="/work/lami-nepal" data-home-project="lami">Lami Nepal</a><a href="/work" data-all-work>All work</a></div>
       </div>
       <div class="menu-visual" aria-hidden="true"></div>
-      <aside class="menu-note"><span>izzyLabs</span><h2>Independent thinking.<br /><em>Shared ambition.</em></h2><p>We build digital products of our own and partner with businesses to create theirs.</p><a href="#contact">Start a conversation</a></aside>
+      <aside class="menu-note"><span>izzyLabs</span><h2>Independent thinking.<br /><em>Shared ambition.</em></h2><p>We build digital products of our own and partner with businesses to create theirs.</p><a href="/contact">Start a conversation</a></aside>
     </div>
 
     <main id="top" tabindex="-1">
@@ -64,10 +66,10 @@
         <div class="minimal-home"><canvas id="cosmos" aria-hidden="true"></canvas>
 
           <nav class="home-work-list" aria-label="Selected work">
-            <a href="#work-glow" data-home-project="glow">Glow</a>
-            <a href="#work-carenearby" data-home-project="care">CareNearby</a>
-            <a href="#work-lami" data-home-project="lami">Lami Nepal</a>
-            <a href="#all-work" data-all-work>All work</a>
+            <a href="/work/glow" data-home-project="glow">Glow</a>
+            <a href="/work/carenearby" data-home-project="care">CareNearby</a>
+            <a href="/work/lami-nepal" data-home-project="lami">Lami Nepal</a>
+            <a href="/work" data-all-work>All work</a>
           </nav>
           <p class="home-intro">We turn ideas into digital products.<br />Some begin with us.<br />Others begin with you.</p>
           <h1 id="hero-title" class="screen-headline"><span>we build</span><span>future</span></h1>
@@ -75,7 +77,7 @@
       </section>
 
       <section class="work section-shell" id="work" aria-labelledby="work-title">
-        <div class="section-kicker"><a href="#top">← Back home</a><span>Originals &amp; partnerships</span></div>
+        <div class="section-kicker"><a href="/">← Back home</a><span>Originals &amp; partnerships</span></div>
         <div class="work-heading" id="main-content" tabindex="-1">
           <h2 id="work-title">Two worlds.<br /><em>One point of view.</em></h2>
           <p data-world-copy>Select a world to explore the products and partnerships that make up izzyLabs.</p>
@@ -122,16 +124,16 @@
           <article><span class="info-number">04</span><h2>Make it work smarter.</h2><div><p>Put useful intelligence where it belongs. Explore AI features and automation that reduce friction in everyday tasks.</p><ul><li>AI integration</li><li>Workflow automation</li><li>Product experiments</li></ul></div></article>
           <article><span class="info-number">05</span><h2>Care for the details.</h2><div><p>Check the journeys, test the edges and keep improving. A launch is a starting point for learning what works.</p><ul><li>Quality assurance</li><li>Application testing</li><li>Product refinement</li></ul></div></article>
         </div>
-        <div class="info-end"><p>Something in mind?</p><button type="button" data-open-enquiry>Let's build it together. <span aria-hidden="true">↗</span></button><a href="#about-us">Meet izzyLabs →</a></div>
+        <div class="info-end"><p>Something in mind?</p><button type="button" data-open-enquiry>Let's build it together. <span aria-hidden="true">↗</span></button><a href="/about-us">Meet izzyLabs →</a></div>
       </section>
       <section class="info-page" id="about-us" aria-labelledby="about-title" hidden>
         <div class="info-heading"><p class="info-eyebrow">About us / izzyLabs</p><h1 id="about-title" tabindex="-1">Independent minds.<br /><em>Shared ambition.</em></h1><p class="info-lead">izzyLabs is a home for ideas, products and the people building them. We create ventures of our own and help others bring theirs to life.</p></div>
         <div class="about-statement"><p class="info-eyebrow">One company. Two ways to build.</p><h2>We think like founders.<br />We work like partners.</h2><p>Building our own products keeps us close to the questions every founder faces: what matters, what comes first, and how to make something useful. We bring that same curiosity and care to our client work.</p></div>
         <div class="about-worlds">
-          <article><span class="info-number">01 / Originals</span><h2>Ideas that start<br /><em>with us.</em></h2><p>Our own products, shaped from the first question onward. Glow explores a simpler way to book beauty and self-care. CareNearby brings care services closer to the people who need them.</p><a href="#world-originals">Explore Glow &amp; CareNearby <span aria-hidden="true">↗</span></a></article>
-          <article><span class="info-number">02 / Partnerships</span><h2>Ambitions we build<br /><em>together.</em></h2><p>We partner with businesses to turn their ideas into digital experiences. Our work with Lami Nepal brings product design and application development together.</p><a href="#world-clients">Explore client work <span aria-hidden="true">↗</span></a></article>
+          <article><span class="info-number">01 / Originals</span><h2>Ideas that start<br /><em>with us.</em></h2><p>Our own products, shaped from the first question onward. Glow explores a simpler way to book beauty and self-care. CareNearby brings care services closer to the people who need them.</p><a href="/ventures">Explore Glow &amp; CareNearby <span aria-hidden="true">↗</span></a></article>
+          <article><span class="info-number">02 / Partnerships</span><h2>Ambitions we build<br /><em>together.</em></h2><p>We partner with businesses to turn their ideas into digital experiences. Our work with Lami Nepal brings product design and application development together.</p><a href="/clients">Explore client work <span aria-hidden="true">↗</span></a></article>
         </div>
-        <div class="info-end"><p>The next idea could be yours.</p><button type="button" data-open-enquiry>Let's start a conversation. <span aria-hidden="true">↗</span></button><a href="#what-we-do">See what we do →</a></div>
+        <div class="info-end"><p>The next idea could be yours.</p><button type="button" data-open-enquiry>Let's start a conversation. <span aria-hidden="true">↗</span></button><a href="/what-we-do">See what we do →</a></div>
       </section>
       <section class="info-page news-page" id="latest-news" aria-labelledby="news-title" hidden>
         <div class="info-heading"><p class="info-eyebrow">Journal / izzyLabs</p><h1 id="news-title" tabindex="-1">Latest news.</h1></div>
@@ -247,9 +249,18 @@
             <button type="button" data-care-info="careers">Join our team <span aria-hidden="true">↗</span></button>
             <button type="button" data-open-enquiry>Just say hello <span aria-hidden="true">↗</span></button>
           </div></div>
-          <div class="care-footer-bottom"><a href="#top" class="care-footer-brand" aria-label="izzyLabs home">izzyLabs</a><nav aria-label="Social media"><button type="button" aria-disabled="true" title="Link coming soon">LinkedIn</button><button type="button" aria-disabled="true" title="Link coming soon">Instagram</button><button type="button" aria-disabled="true" title="Link coming soon">X</button><button type="button" aria-disabled="true" title="Link coming soon">Medium</button></nav><nav aria-label="Company"><button type="button" data-care-info="careers">Careers</button><button type="button" data-open-enquiry>Contact</button></nav><nav aria-label="Information"><button type="button" data-care-info="privacy">Privacy</button><button type="button" data-care-info="accessibility">Accessibility</button></nav></div>
+          <div class="care-footer-bottom"><a href="/" class="care-footer-brand" aria-label="izzyLabs home">izzyLabs</a><nav aria-label="Social media"><button type="button" aria-disabled="true" title="Link coming soon">LinkedIn</button><button type="button" aria-disabled="true" title="Link coming soon">Instagram</button><button type="button" aria-disabled="true" title="Link coming soon">X</button><button type="button" aria-disabled="true" title="Link coming soon">Medium</button></nav><nav aria-label="Company"><button type="button" data-care-info="careers">Careers</button><button type="button" data-open-enquiry>Contact</button></nav><nav aria-label="Information"><button type="button" data-care-info="privacy">Privacy</button><button type="button" data-care-info="accessibility">Accessibility</button></nav></div>
         </footer>
       </article>
+    <section class="info-page contact-page" id="contact" hidden aria-labelledby="contact-title">
+ <div class="contact-layout"><div class="contact-intro"><h1 id="contact-title" tabindex="-1">Say hey.</h1><div><p>Have something in mind?</p><p>Tell us what you’re building, where you’re based, and when you’d like to get started.</p><p>A new idea, an existing product, or a question — we’d love to hear it.</p></div></div>        <form id="project-enquiry-form">
+          <label><span>Your name <small>(required)</small></span><input name="name" type="text" autocomplete="name" maxlength="120" placeholder="Full name" required /></label>
+          <label><span>Email address <small>(required)</small></span><input name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required /></label>
+          <label><span>What do you need? <small>(required)</small></span><select name="service" required><option value="">Choose a starting point</option><option>Product strategy &amp; design</option><option>Website development</option><option>Mobile app development</option><option>AI integration</option><option>Quality assurance &amp; testing</option><option>A complete product</option><option>Not sure yet</option></select></label>
+          <label><span>How did you hear of us?</span><input name="referral" type="text" maxlength="200" placeholder="A friend, a project, a search…" /></label>
+          <label class="full-field"><span>Tell us about the idea <small>(required)</small></span><textarea name="brief" rows="4" minlength="10" maxlength="6000" placeholder="What are you building, who is it for, and where do you need help?" required></textarea></label>
+          <div class="form-submit full-field"><p id="enquiry-status" role="status" aria-live="polite">Your enquiry goes to the izzyLabs team.</p><button class="round-link light" type="submit"><span data-submit-label>Send enquiry</span><span aria-hidden="true">↗</span></button></div>
+        </form></div><footer class="contact-footer"><a href="/about-us">About izzyLabs</a><a href="/work">Our work</a><a href="/what-we-do">What we do</a><span>Independent thinking. Shared ambition.</span></footer></section>
     </main>
 
     <dialog class="project-dialog" id="project-detail" aria-labelledby="project-detail-title">
@@ -269,17 +280,12 @@
       <div class="dialog-shell">
         <div class="dialog-top"><span>Start a project · izzyLabs</span><button class="dialog-close" type="button" aria-label="Close enquiry form" data-close-enquiry>Close <span aria-hidden="true">×</span></button></div>
         <div class="dialog-heading"><h2 id="enquiry-title">What should<br /><em>we make next?</em></h2><p>A few details are all we need to start a conversation.</p></div>
-        <form id="project-enquiry-form">
-          <label><span>Your name <small>(required)</small></span><input name="name" type="text" autocomplete="name" maxlength="120" placeholder="Full name" required /></label>
-          <label><span>Email address <small>(required)</small></span><input name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required /></label>
-          <label class="full-field"><span>What do you need? <small>(required)</small></span><select name="service" required><option value="">Choose a starting point</option><option>Product strategy &amp; design</option><option>Website development</option><option>Mobile app development</option><option>AI integration</option><option>Quality assurance &amp; testing</option><option>A complete product</option><option>Not sure yet</option></select></label>
-          <label class="full-field"><span>Tell us about the idea <small>(required)</small></span><textarea name="brief" rows="4" minlength="10" maxlength="6000" placeholder="What are you building, who is it for, and where do you need help?" required></textarea></label>
-          <div class="form-submit full-field"><p id="enquiry-status" role="status" aria-live="polite">Your enquiry goes to the izzyLabs team.</p><button class="round-link light" type="submit"><span data-submit-label>Send enquiry</span><span aria-hidden="true">↗</span></button></div>
-        </form>
+
       </div>
     </dialog>
     <dialog class="care-info-dialog" aria-labelledby="care-info-title"><div><button type="button" class="care-info-close" aria-label="Close information">Close ×</button><p class="care-eyebrow">izzyLabs / Preview</p><h2 id="care-info-title"></h2><p data-care-info-copy></p><p class="care-info-note">Placeholder content — final details will be added before launch.</p></div></dialog>
     <script src="./case-studies.js"></script>
+    <script src="./routes.js"></script>
     <script src="./script.js"></script>
     <script src="./care.js"></script>
     <script type="module" src="./care-journey.js"></script>
