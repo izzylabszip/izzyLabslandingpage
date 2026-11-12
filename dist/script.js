@@ -428,7 +428,7 @@ function routeView() {
     window.scrollTo({top: 0, behavior: "instant"});
     infoPage.querySelector("h1").focus({preventScroll: true});
   } else {
-    document.title = "izzyLabs — we build future";
+    document.title = "izzyLabs | Digital Product Studio — App & Web Development";
     const target = document.getElementById(hash.slice(1)) || document.querySelector("#top");
     requestAnimationFrame(() => {
       target.scrollIntoView({behavior: reduceMotion.matches ? "instant" : "smooth"});
