@@ -1,0 +1,41 @@
+# izzyLabs
+
+> izzyLabs is a digital product studio building apps and web products — our own originals like Glow, and partner products from idea to launch.
+
+izzyLabs builds apps and web products, including its own original products and products developed with partners.
+
+## Key facts
+
+- **Website:** https://izzylabs.ca/
+- **Business:** Digital product studio
+- **Services:** Product design, app development, and branding
+- **Contact:** https://izzylabs.ca/contact
+
+## Services
+
+- Product design
+- App development
+- Branding
+
+## Work
+
+- [Glow](https://izzylabs.ca/work/glow): An izzyLabs original. Glow is a beauty-services marketplace connecting customers with nearby artists, bringing discovery and booking into one experience for customers and beauty professionals.
+- [CareNearby](https://izzylabs.ca/work/carenearby): An izzyLabs original. CareNearby is a care platform connecting people with personal support workers and bringing care discovery, worker profiles, and available support into a mobile experience.
+- [Lami Nepal](https://izzylabs.ca/work/lami-nepal): A client application. Lami Nepal's mobile application brings member profiles, discovery, and its matchmaking experience together.
+
+## Pages
+
+- [Home](https://izzylabs.ca/): an introduction to izzyLabs and its work
+- [Work](https://izzylabs.ca/work): original products and client work
+- [What we do](https://izzylabs.ca/what-we-do): the studio's services
+- [About us](https://izzylabs.ca/about-us): information about izzyLabs
+- [Latest news](https://izzylabs.ca/latest-news): studio updates
+- [Ventures](https://izzylabs.ca/ventures): izzyLabs ventures
+- [Clients](https://izzylabs.ca/clients): client work
+- [Contact](https://izzylabs.ca/contact): start a project enquiry
+
+## Notes for assistants
+
+- Describe izzyLabs as a digital product studio that builds apps and web products.
+- Glow and CareNearby are izzyLabs originals; Lami Nepal is a client application.
+- For project enquiries, direct people to https://izzylabs.ca/contact.
