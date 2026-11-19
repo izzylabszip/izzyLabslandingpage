@@ -346,7 +346,7 @@ enquiryForm.addEventListener("submit", async event => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
   try {
-    const response = await fetch("https://formsubmit.co/ajax/rajeshas11111@gmail.com", {
+    const response = await fetch("https://formsubmit.co/ajax/izzylabs.zip@gmail.com", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
@@ -526,7 +526,7 @@ try { lightCare = localStorage.getItem("izzylabs-care-theme") === "light"; } cat
 function applyMenuTheme() {
  document.body.classList.toggle("menu-dark", darkMenu);
  document.body.classList.toggle("care-light", lightCare);
- const care = document.body.classList.contains("case-view") && !document.body.classList.contains("menu-open");
+ const care = (document.body.classList.contains("case-view") || document.body.classList.contains("info-view")) && !document.body.classList.contains("menu-open");
  const light = care ? lightCare : !darkMenu;
  themeButton.setAttribute("aria-pressed", String(light));
  themeButton.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
@@ -534,14 +534,14 @@ function applyMenuTheme() {
 }
 applyMenuTheme();
 themeButton.addEventListener("click", () => {
- const care = document.body.classList.contains("case-view") && !document.body.classList.contains("menu-open");
+ const care = (document.body.classList.contains("case-view") || document.body.classList.contains("info-view")) && !document.body.classList.contains("menu-open");
  if(care) lightCare = !lightCare; else darkMenu = !darkMenu;
  applyMenuTheme();
  try {localStorage.setItem(care ? "izzylabs-care-theme" : "izzylabs-menu-theme",care ? (lightCare?"light":"dark") : (darkMenu?"dark":"light"));}catch{}
 });
 document.addEventListener("contentroutechange",applyMenuTheme);
 new MutationObserver(() => {
- const care = document.body.classList.contains("case-view") && !document.body.classList.contains("menu-open");
+ const care = (document.body.classList.contains("case-view") || document.body.classList.contains("info-view")) && !document.body.classList.contains("menu-open");
  const light = care ? lightCare : !darkMenu;
  themeButton.setAttribute("aria-label",light ? "Switch to dark mode" : "Switch to light mode");
  themeButton.setAttribute("aria-pressed",String(light));
@@ -582,7 +582,7 @@ function drawCosmos(){
  ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(field,0,0);
 }
 function animateSky(t){
- if(!document.hidden && (document.body.classList.contains("menu-open") || (!document.body.classList.contains("info-view") && !document.body.classList.contains("work-view"))) && skyVisible){
+ if(!document.hidden && (document.body.classList.contains("menu-open") || !document.body.classList.contains("work-view")) && skyVisible){
  ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(field,0,0);
  if(!reduceMotion.matches){
   if(t>nextMeteor){meteors.push({start:t,x:Math.random()*.7,y:.02+Math.random()*.3,duration:1500+Math.random()*500});nextMeteor=t+4500+Math.random()*3500;}
@@ -603,8 +603,9 @@ let skyVisible=true;
 new IntersectionObserver(entries=>{skyVisible=entries[0].isIntersecting;},{threshold:0}).observe(sky);
 function placeSky(){
  const care=document.body.classList.contains("case-view");
+ const info=document.body.classList.contains("info-view");
  const menu=document.body.classList.contains("menu-open");
- const parent=document.querySelector(menu?".mobile-menu":care?".care-case:not([hidden]) .care-footer-sky":".minimal-home");
+ const parent=document.querySelector(menu?".mobile-menu":care?".care-case:not([hidden]) .care-footer-sky":info?".info-page:not([hidden]) .care-footer-sky":".minimal-home");
  if(!parent)return;
  if(sky.parentElement!==parent)parent.prepend(sky);
  drawCosmos();
