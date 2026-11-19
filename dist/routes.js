@@ -1,5 +1,5 @@
 "use strict";
-const pagePaths = {"#top": "/", "#work-glow": "/work/glow", "#work-carenearby": "/work/carenearby", "#work-lami": "/work/lami-nepal", "#all-work": "/work", "#what-we-do": "/what-we-do", "#about-us": "/about-us", "#latest-news": "/latest-news", "#contact": "/contact", "#world-originals": "/ventures", "#world-clients": "/clients"};
+const pagePaths = {"#top": "/", "#work-glow": "/work/glow", "#work-carenearby": "/work/carenearby", "#work-lami": "/work/lami-nepal", "#work-amit": "/work/amit-blends", "#all-work": "/work", "#what-we-do": "/what-we-do", "#about-us": "/about-us", "#latest-news": "/latest-news", "#contact": "/contact", "#world-originals": "/ventures", "#world-clients": "/clients"};
 function routeId() { return Object.keys(pagePaths).find(id => pagePaths[id] === (location.pathname.replace(/\/$/, '') || '/')) || '#top'; }
 function pagePath(id) { return pagePaths[id] || id; }
 function navigatePage(id) {

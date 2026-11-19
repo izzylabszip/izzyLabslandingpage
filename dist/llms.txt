@@ -22,6 +22,7 @@ izzyLabs builds apps and web products, including its own original products and p
 - [Glow](https://izzylabs.ca/work/glow): An izzyLabs original. Glow is a beauty-services marketplace connecting customers with nearby artists, bringing discovery and booking into one experience for customers and beauty professionals.
 - [CareNearby](https://izzylabs.ca/work/carenearby): An izzyLabs original. CareNearby is a care platform connecting people with personal support workers and bringing care discovery, worker profiles, and available support into a mobile experience.
 - [Lami Nepal](https://izzylabs.ca/work/lami-nepal): A client application. Lami Nepal's mobile application brings member profiles, discovery, and its matchmaking experience together.
+- [Amit Blends](https://izzylabs.ca/work/amit-blends): A client website. Barbershop site and booking request flow for a single-chair barber in Greater Sudbury, Ontario, with published prices, local structured data, and a booking form that hands off to WhatsApp.
 
 ## Pages
 

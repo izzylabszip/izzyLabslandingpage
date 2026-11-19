@@ -18,6 +18,10 @@
       "destination": "/_routes/work-lami-nepal.html"
     },
     {
+      "source": "/work/amit-blends",
+      "destination": "/_routes/work-amit-blends.html"
+    },
+    {
       "source": "/work",
       "destination": "/_routes/work.html"
     },

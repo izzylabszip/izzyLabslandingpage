@@ -21,6 +21,8 @@ const routes = {
     'Home care booking for Greater Sudbury, Ontario. Families browse police-checked Personal Support Workers and pick who comes, flat $25/hr, no agency markup.'],
   '/work/lami-nepal': ['work-lami-nepal', 'Lami Nepal: bilingual matchmaking app, Kathmandu | izzyLabs',
     'Full-service matchmaking in Kathmandu, established 2077 B.S. Nine services from compatible matching through legal marriage and venue booking.'],
+  '/work/amit-blends': ['work-amit-blends', 'Amit Blends: barbershop website and booking, Sudbury | izzyLabs',
+    'Barbershop site and booking flow for a single-chair barber in Greater Sudbury. Astro static build, published prices, and local-pack structured data.'],
   '/what-we-do': ['what-we-do', 'App, web and AI integration services in Canada | izzyLabs',
     'Product strategy and design, website and mobile app development, AI and LLM integration, and QA testing, from a product studio that ships its own apps too.'],
   '/about-us': ['about-us', 'About izzyLabs: an independent digital product studio',

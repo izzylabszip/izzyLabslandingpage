@@ -36,6 +36,11 @@ const breadcrumbTrails = {
     ["Work", "https://izzylabs.ca/work"],
     ["Lami Nepal", "https://izzylabs.ca/work/lami-nepal"],
   ],
+  "#work-amit": [
+    ["Home", "https://izzylabs.ca/"],
+    ["Work", "https://izzylabs.ca/work"],
+    ["Amit Blends", "https://izzylabs.ca/work/amit-blends"],
+  ],
   "#what-we-do": [
     ["Home", "https://izzylabs.ca/"],
     ["What we do", "https://izzylabs.ca/what-we-do"],
