@@ -297,23 +297,19 @@ bindDialogClose(projectDialog, "[data-close-project]");
 bindDialogClose(enquiryDialog, "[data-close-enquiry]");
 
 const enquiryForm = document.querySelector("#project-enquiry-form");
-const enquiryStatus = document.querySelector("#enquiry-status");
-const submitButton = enquiryForm.querySelector('[type="submit"]');
-const submitLabel = enquiryForm.querySelector("[data-submit-label]");
-let sending = false;
-let confirmed = false;
+// Let the provider handle submission, recipient activation and any CAPTCHA.
+enquiryForm.method = "post";
+enquiryForm.action = "https://formsubmit.co/izzylabs.zip@gmail.com";
+const enquirySubject = document.createElement("input");
+enquirySubject.type = "hidden";
+enquirySubject.name = "_subject";
+enquirySubject.value = "izzyLabs project enquiry";
+enquiryForm.append(enquirySubject);
 
 function openEnquiry(service) {
   closeMenu();
   if (projectDialog.open) projectDialog.close();
-  if (confirmed) {
-    confirmed = false;
-    submitButton.disabled = false;
-    submitLabel.textContent = "Send enquiry";
-    enquiryStatus.textContent = "Your enquiry goes to the izzyLabs team.";
-    delete enquiryStatus.dataset.state;
-  }
-  if (service && !sending) enquiryForm.elements.service.value = service;
+  if (service) enquiryForm.elements.service.value = service;
   const entering = routeId() !== '#contact';
   navigatePage('#contact');
   if (entering && !reduceMotion.matches) document.querySelector('.contact-page').animate(
@@ -325,57 +321,16 @@ document.querySelectorAll("[data-open-enquiry]").forEach(button => button.addEve
 document.querySelectorAll("[data-enquire-service]").forEach(button => button.addEventListener("click", () => openEnquiry(button.dataset.enquireService)));
 enquiryForm.querySelectorAll("input, textarea").forEach(input => input.addEventListener("input", () => input.setCustomValidity("")));
 
-enquiryForm.addEventListener("submit", async event => {
-  event.preventDefault();
-  if (sending || confirmed) return;
-  const values = Object.fromEntries(new FormData(enquiryForm));
-  for (const key of Object.keys(values)) values[key] = values[key].trim();
-  if (!values.name || values.brief.length < 10) {
-    const input = !values.name ? enquiryForm.elements.name : enquiryForm.elements.brief;
-    input.setCustomValidity(!values.name ? "Please enter your name." : "Please describe your idea in at least 10 characters.");
-    input.reportValidity();
-    return;
+enquiryForm.addEventListener("submit", event => {
+  for (const field of ["name", "brief"]) {
+    const input = enquiryForm.elements[field];
+    input.value = input.value.trim();
+    if (!input.reportValidity()) {
+      event.preventDefault();
+      return;
+    }
   }
-  if (!enquiryForm.reportValidity()) return;
-  sending = true;
-  submitButton.disabled = true;
-  submitLabel.textContent = "Sending…";
-  enquiryStatus.textContent = "Sending your enquiry…";
-  delete enquiryStatus.dataset.state;
-  enquiryForm.setAttribute("aria-busy", "true");
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-  try {
-    const response = await fetch("https://formsubmit.co/ajax/izzylabs.zip@gmail.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        ...values,
-        _subject: "izzyLabs project enquiry — " + values.service,
-        _template: "table"
-      }),
-      signal: controller.signal
-    });
-    if (!response.ok) throw new Error("The service did not accept the request.");
-    const result = await response.json();
-    if (result.success !== true && result.success !== "true") throw new Error("The service did not confirm delivery.");
-    confirmed = true;
-    enquiryForm.reset();
-    enquiryStatus.textContent = "Thank you. Your enquiry has been submitted to izzyLabs.";
-    enquiryStatus.dataset.state = "success";
-    submitLabel.textContent = "Enquiry submitted";
-  } catch (error) {
-    enquiryStatus.textContent = error.name === "AbortError"
-      ? "We couldn’t confirm whether your enquiry arrived. Your details are still here. Please wait before trying again."
-      : "Your enquiry couldn’t be confirmed. Your details are still here—please try again later.";
-    enquiryStatus.dataset.state = "error";
-    submitLabel.textContent = "Try again";
-  } finally {
-    clearTimeout(timeout);
-    sending = false;
-    submitButton.disabled = confirmed;
-    enquiryForm.removeAttribute("aria-busy");
-  }
+  enquirySubject.value = "izzyLabs project enquiry — " + enquiryForm.elements.service.value;
 });
 
 const header = document.querySelector("[data-header]");
